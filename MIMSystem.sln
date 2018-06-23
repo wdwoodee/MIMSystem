@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIMSystem", "MIMSystem\MIMSystem.csproj", "{EA4F2DAA-2E94-4737-9EC5-105D6A278A53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIMSystem.DLA", "MIMSystem.DLA\MIMSystem.DLA.csproj", "{82FF062F-7029-4F59-BFC3-B2092328B251}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA4F2DAA-2E94-4737-9EC5-105D6A278A53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA4F2DAA-2E94-4737-9EC5-105D6A278A53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA4F2DAA-2E94-4737-9EC5-105D6A278A53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA4F2DAA-2E94-4737-9EC5-105D6A278A53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82FF062F-7029-4F59-BFC3-B2092328B251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82FF062F-7029-4F59-BFC3-B2092328B251}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82FF062F-7029-4F59-BFC3-B2092328B251}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82FF062F-7029-4F59-BFC3-B2092328B251}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

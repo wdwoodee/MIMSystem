@@ -1,0 +1,7 @@
+G:\code\MIMSystem\MIMSystem.DLA\bin\Debug\MIMSystem.DLA.dll
+G:\code\MIMSystem\MIMSystem.DLA\bin\Debug\MIMSystem.DLA.pdb
+G:\code\MIMSystem\MIMSystem.DLA\bin\Debug\System.Data.SQLite.dll
+G:\code\MIMSystem\MIMSystem.DLA\bin\Debug\System.Data.SQLite.xml
+G:\code\MIMSystem\MIMSystem.DLA\obj\Debug\MIMSystem.DLA.csprojResolveAssemblyReference.cache
+G:\code\MIMSystem\MIMSystem.DLA\obj\Debug\MIMSystem.DLA.dll
+G:\code\MIMSystem\MIMSystem.DLA\obj\Debug\MIMSystem.DLA.pdb
