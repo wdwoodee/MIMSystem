@@ -34,7 +34,7 @@ namespace MIMSystem
             
             //DBHelper2.ExecuteNonQuery(connectionString, cm);
             //Postgres pg = new Postgres();
-            MessageBox.Show(DBAccess.TestConnection());
+            //MessageBox.Show(DBAccess.TestConnection());
             MessageBox.Show(Postgres.TestConnection());
 
             //DataTable dtAllTables = DBHelper.ExecuteSQL(allTables);

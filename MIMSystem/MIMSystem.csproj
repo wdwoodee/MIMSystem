@@ -41,6 +41,10 @@
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Npgsql, Version=3.0.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Npgsql.3.0.7\lib\net45\Npgsql.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -69,6 +73,7 @@
   <ItemGroup>
     <Compile Include="DBHelper.cs" />
     <Compile Include="DBHelper2.cs" />
+    <Compile Include="DBPostgres.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
