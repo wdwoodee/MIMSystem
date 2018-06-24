@@ -1,0 +1,55 @@
+-- Schema: public
+
+-- DROP SCHEMA public;
+
+CREATE TABLE users(
+Id serial,
+Username character varying(128),
+Password character varying(128),
+PRIMARY KEY(Id)
+);
+
+
+CREATE TABLE customer(
+Id serial,
+Mobile character varying(11),
+ConTimes integer,
+TotalConAmount integer,
+TotalIntegral integer,
+PRIMARY KEY(Id)
+);
+
+CREATE TABLE integral(
+Id serial,
+Mobile character varying(11),
+ConType character varying,
+ConAmount integer,
+IntegralChange integer,
+ConTime timestamp with time zone,
+PRIMARY KEY(Id)
+);
+
+CREATE TABLE category(
+Id serial,
+ConTypeId integer,
+Conype character varying,
+PRIMARY KEY(Id)
+);
+
+CREATE INDEX index_user ON users (Username);
+CREATE INDEX index_customer ON customer (Mobile);
+CREATE INDEX index_integral ON integral (Mobile);
+CREATE INDEX index_category ON category (ConTypeId);
+CREATE INDEX index_user2 ON users (id);
+CREATE INDEX index_customer2 ON customer (id);
+CREATE INDEX index_integral2 ON integral (id);
+CREATE INDEX index_category2 ON category (id);
+
+drop index index_user;
+drop index index_customer;
+drop index index_integral;
+drop index index_category;
+
+
+
+
