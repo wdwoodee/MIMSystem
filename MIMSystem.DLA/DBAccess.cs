@@ -58,6 +58,7 @@ namespace MIMSystem.DLA
             {
                 using (SQLiteConnection conn = new SQLiteConnection(connectstr))
                 {
+                    conn.Open();
                     using (SQLiteCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = sql;
@@ -71,8 +72,9 @@ namespace MIMSystem.DLA
                     }
                 }
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e);
                 return dt;
             }
         }
@@ -84,6 +86,7 @@ namespace MIMSystem.DLA
             {
                 using (SQLiteConnection conn = new SQLiteConnection(connectstr))
                 {
+                    conn.Open();
                     using (SQLiteCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = sql;
@@ -96,11 +99,17 @@ namespace MIMSystem.DLA
                     }
                 }
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 return rowAffected;
             }
         }
+        #endregion
+
+        #region common method
+        //public static DataTable 
+
         #endregion
     }
 }
