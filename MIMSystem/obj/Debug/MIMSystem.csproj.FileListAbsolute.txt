@@ -19,3 +19,4 @@ G:\code\MIMSystem\MIMSystem\bin\Debug\System.Data.SQLite.xml
 G:\code\MIMSystem\MIMSystem\bin\Debug\Npgsql.xml
 G:\code\MIMSystem\MIMSystem\obj\Debug\MIMSystem.exe
 G:\code\MIMSystem\MIMSystem\obj\Debug\MIMSystem.pdb
+G:\code\MIMSystem\MIMSystem\obj\Debug\MIMSystem.NewConsumpation.resources

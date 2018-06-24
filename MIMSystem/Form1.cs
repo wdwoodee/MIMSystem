@@ -11,6 +11,7 @@ using MIMSystem.DLA;
 using System.Data.SQLite;
 using System.Configuration;
 
+
 namespace MIMSystem
 {
     public partial class Form1 : Form
@@ -24,18 +25,19 @@ namespace MIMSystem
         private void button1_Click(object sender, EventArgs e)
         {
 
+            #region test sqlite
             //MessageBox.Show(DBHelper.TestConnection());
             //MessageBox.Show(DBAccess.TestConnection());
             //string insert = "insert into User(Username,password) values(dong,12345678);";
             //SQLiteCommand cm = new SQLiteCommand();
             //cm.CommandText = insert;
-             
+
             //DBHelper.ExecuteNonQuery(insert);
-            
+
             //DBHelper2.ExecuteNonQuery(connectionString, cm);
             //Postgres pg = new Postgres();
             //MessageBox.Show(DBAccess.TestConnection());
-            MessageBox.Show(Postgres.TestConnection());
+            //MessageBox.Show(Postgres.TestConnection());
 
             //DataTable dtAllTables = DBHelper.ExecuteSQL(allTables);
 
@@ -44,9 +46,14 @@ namespace MIMSystem
 
 
             //string insert = "insert into User(Username,password) values(dong,12345678);";
-            string sqlUser = "select count(*) from users where Username = 'admin'";
-            int a = Postgres.ExecuteScaler(sqlUser);
-            Console.WriteLine(a);
+            #endregion
+
+            # region test postgress
+            //MessageBox.Show(Postgres.TestConnection());
+            //string sqlUser = "select count(*) from users where Username = 'admin'";
+            //int a = Postgres.ExecuteScaler(sqlUser);
+            //Console.WriteLine(a);
+            #endregion
 
             string sqlCustomer = @"select * from Customer where Mobile ='" + txtBoxMobile.Text + "'";
             string sqlDetail = @"select * from Integral where Mobile ='" + txtBoxMobile.Text + "'";
@@ -66,7 +73,10 @@ namespace MIMSystem
 
         private void btnNewCon_Click(object sender, EventArgs e)
         {
+            //Form NewConsumpation = new Form();
 
+            new NewConsumpation().ShowDialog();
+            this.Hide();
         }
     }
 }
