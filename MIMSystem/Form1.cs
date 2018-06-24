@@ -15,7 +15,7 @@ namespace MIMSystem
 {
     public partial class Form1 : Form
     {
-        public static string connectionString = ConfigurationManager.ConnectionStrings["connectString"].ConnectionString;
+        //public static string connectionString = ConfigurationManager.ConnectionStrings["connectString"].ConnectionString;
         public Form1()
         {
             InitializeComponent();
@@ -24,27 +24,42 @@ namespace MIMSystem
         private void button1_Click(object sender, EventArgs e)
         {
 
-            MessageBox.Show(DBHelper.TestConnection());
+            //MessageBox.Show(DBHelper.TestConnection());
             //MessageBox.Show(DBAccess.TestConnection());
-            string insert = "insert into User(Username,password) values(dong,12345678);";
-            DBHelper.ExecuteNonQuery(insert);
-
-            SQLiteCommand cm = new SQLiteCommand();
-            cm.CommandText = insert;
+            //string insert = "insert into User(Username,password) values(dong,12345678);";
+            //SQLiteCommand cm = new SQLiteCommand();
+            //cm.CommandText = insert;
+             
+            //DBHelper.ExecuteNonQuery(insert);
+            
             //DBHelper2.ExecuteNonQuery(connectionString, cm);
+            //Postgres pg = new Postgres();
+            MessageBox.Show(DBAccess.TestConnection());
+            MessageBox.Show(Postgres.TestConnection());
+
+            //DataTable dtAllTables = DBHelper.ExecuteSQL(allTables);
+
+            //DataTable dtCustomer = DBAccess.ExecuteSQL(sqlCustomer);
+            //DataTable dtDetail = DBAccess.ExecuteSQL(sqlDetail);
+
+
+            //string insert = "insert into User(Username,password) values(dong,12345678);";
+            string sqlUser = "select count(*) from users where Username = 'admin'";
+            int a = Postgres.ExecuteScaler(sqlUser);
+            Console.WriteLine(a);
 
             string sqlCustomer = @"select * from Customer where Mobile ='" + txtBoxMobile.Text + "'";
             string sqlDetail = @"select * from Integral where Mobile ='" + txtBoxMobile.Text + "'";
             string allTables = "select name from sqlite_master where type='table' order by name";
-            DataTable dtAllTables = DBHelper.ExecuteSQL(allTables);
-            
-            DataTable dtCustomer = DBAccess.ExecuteSQL(sqlCustomer);
-            DataTable dtDetail = DBAccess.ExecuteSQL(sqlDetail);
+            DataTable dtAllTables = Postgres.ExecuteSQL(allTables);
+
+            DataTable dtCustomer = Postgres.ExecuteSQL(sqlCustomer);
+            DataTable dtDetail = Postgres.ExecuteSQL(sqlDetail);
 
             string createTabUser = "Create Table User2(Username nvarchar(100) NOT NULL, Password nvarchar(100) NOT NULL)";
-            DBHelper.ExecuteNonQuery(createTabUser);
+            Postgres.ExecuteNonQuery(createTabUser);
             string insert2 = "insert into User2(Username,password) values(dong,12345678);";
-            DBHelper.ExecuteSQL(insert2);
+            Postgres.ExecuteSQL(insert2);
 
 
         }
