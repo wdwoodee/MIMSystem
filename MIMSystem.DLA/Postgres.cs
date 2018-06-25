@@ -145,7 +145,7 @@ namespace MIMSystem.DLA
             int affectCount = 0;
             if (!String.IsNullOrEmpty(mobile))
             {
-                string sqlInsertCustomer = string.Format("insert into customer(mobile,contimes,totalconamount,totalintegrel) values({0},{1},{2},{3})", mobile, conTimes, conTotalAmount, conIntegral);
+                string sqlInsertCustomer = string.Format("insert into customer(mobile,contimes,totalconamount,totalintegral) values({0},{1},{2},{3})", mobile, conTimes, conTotalAmount, conIntegral);
                 affectCount = ExecuteNonQuery(sqlInsertCustomer);
             }
             else
@@ -161,7 +161,7 @@ namespace MIMSystem.DLA
             int affectCount = 0;
             if (!String.IsNullOrEmpty(mobile))
             {
-                string sqlInsertCustomer = string.Format("update customer set mobile={0},contimes={1},totalconamount={2},totalintegral={3}) where mobile='{4}'", mobile, conTimes, conTotalAmount, conIntegral, mobile);
+                string sqlInsertCustomer = string.Format("update customer set mobile={0},contimes={1},totalconamount={2},totalintegral={3} where mobile='{4}'", mobile, conTimes, conTotalAmount, conIntegral, mobile);
                 affectCount = ExecuteNonQuery(sqlInsertCustomer);
             }
             else
@@ -186,7 +186,7 @@ namespace MIMSystem.DLA
             //string date = DateTime.Now.Date.ToString();
             if (!String.IsNullOrEmpty(mobile) && !String.IsNullOrEmpty(mobile))
             {
-                string sqlInsertIntegrel = string.Format("insert into integral(mobile,contype,conamount,integralchange,contime) values({0},{1},{2},{3},now())", mobile, conType, conAmount, conIntegral);
+                string sqlInsertIntegrel = string.Format("insert into integral(mobile,contype,conamount,integralchange,contime) values({0},'{1}',{2},{3},now())", mobile, conType, conAmount, conIntegral);
                 affectCount = ExecuteNonQuery(sqlInsertIntegrel);
             }
             else

@@ -83,36 +83,38 @@ namespace MIMSystem
             else
             {
                 //不为0，则表示不是新客户
-                
+
                 //更新Integrel表
                 Postgres.InsertIntegrel(mobile, conType, conAmount, conIntegrel);
 
                 //查询integrel表中消费的次数
-                string sqlQueryIntegrel = "select * from integrel where mobile='" + mobile + "'";
+                string sqlQueryIntegrel = "select * from integral where mobile='" + mobile + "'";
                 DataTable dtIntegrel = new DataTable();
                 dtIntegrel = Postgres.ExecuteSQL(sqlQueryIntegrel);
-                conTimes = dtIntegrel.Rows.Count + 1;
+                conTimes = dtIntegrel.Rows.Count;
+                int conAmount2 = 0;
                 foreach (DataRow row in dtIntegrel.Rows)
                 {
-                    conAmount =+ Convert.ToInt32(row["conamout"]);
+                    conAmount2 += Convert.ToInt32(row["conamount"]);
                 }
+                int conIntegrel2 = 0;
                 foreach (DataRow row in dtIntegrel.Rows)
                 {
-                    conIntegrel = +Convert.ToInt32(row["conintegrel"]);
+                    conIntegrel2 += Convert.ToInt32(row["integralchange"]);
                 }
 
                 //更新Customer表
-                Postgres.UpdateCustomer(mobile, conTimes, conAmount, conIntegrel);
-                
+                Postgres.UpdateCustomer(mobile, conTimes, conAmount2, conIntegrel2);
+
             }
             this.Hide();
             //this.Hide();
-            
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            
+
             //this.Hide();
             this.Close();
         }
