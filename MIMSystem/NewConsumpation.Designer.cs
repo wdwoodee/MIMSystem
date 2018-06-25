@@ -39,12 +39,12 @@ namespace MIMSystem
         {
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbBoxConType = new System.Windows.Forms.ComboBox();
             this.labConType = new System.Windows.Forms.Label();
             this.labMobile = new System.Windows.Forms.Label();
-            this.tetBoxMobile = new System.Windows.Forms.TextBox();
-            this.tetBoxConAmount = new System.Windows.Forms.TextBox();
-            this.tetBoxIntgeralChange = new System.Windows.Forms.TextBox();
+            this.txtBoxMobile = new System.Windows.Forms.TextBox();
+            this.txtBoxConAmount = new System.Windows.Forms.TextBox();
+            this.txtBoxIntgeralChange = new System.Windows.Forms.TextBox();
             this.labConAmount = new System.Windows.Forms.Label();
             this.labIntegralChange = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -57,6 +57,7 @@ namespace MIMSystem
             this.btnOK.TabIndex = 0;
             this.btnOK.Text = "确认";
             this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
             // 
@@ -66,19 +67,20 @@ namespace MIMSystem
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // comboBox1
+            // cmbBoxConType
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cmbBoxConType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBoxConType.FormattingEnabled = true;
+            this.cmbBoxConType.Items.AddRange(new object[] {
             "消费",
             "积分兑换",
             "加钱购"});
-            this.comboBox1.Location = new System.Drawing.Point(224, 71);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(146, 20);
-            this.comboBox1.TabIndex = 2;
+            this.cmbBoxConType.Location = new System.Drawing.Point(224, 71);
+            this.cmbBoxConType.Name = "cmbBoxConType";
+            this.cmbBoxConType.Size = new System.Drawing.Size(146, 20);
+            this.cmbBoxConType.TabIndex = 2;
             // 
             // labConType
             // 
@@ -98,26 +100,27 @@ namespace MIMSystem
             this.labMobile.TabIndex = 4;
             this.labMobile.Text = "电话：";
             // 
-            // tetBoxMobile
+            // txtBoxMobile
             // 
-            this.tetBoxMobile.Location = new System.Drawing.Point(224, 116);
-            this.tetBoxMobile.Name = "tetBoxMobile";
-            this.tetBoxMobile.Size = new System.Drawing.Size(146, 21);
-            this.tetBoxMobile.TabIndex = 5;
+            this.txtBoxMobile.Location = new System.Drawing.Point(224, 116);
+            this.txtBoxMobile.Name = "txtBoxMobile";
+            this.txtBoxMobile.Size = new System.Drawing.Size(146, 21);
+            this.txtBoxMobile.TabIndex = 5;
             // 
-            // tetBoxConAmount
+            // txtBoxConAmount
             // 
-            this.tetBoxConAmount.Location = new System.Drawing.Point(224, 164);
-            this.tetBoxConAmount.Name = "tetBoxConAmount";
-            this.tetBoxConAmount.Size = new System.Drawing.Size(146, 21);
-            this.tetBoxConAmount.TabIndex = 6;
+            this.txtBoxConAmount.Location = new System.Drawing.Point(224, 164);
+            this.txtBoxConAmount.Name = "txtBoxConAmount";
+            this.txtBoxConAmount.Size = new System.Drawing.Size(146, 21);
+            this.txtBoxConAmount.TabIndex = 6;
             // 
-            // tetBoxIntgeralChange
+            // txtBoxIntgeralChange
             // 
-            this.tetBoxIntgeralChange.Location = new System.Drawing.Point(224, 218);
-            this.tetBoxIntgeralChange.Name = "tetBoxIntgeralChange";
-            this.tetBoxIntgeralChange.Size = new System.Drawing.Size(146, 21);
-            this.tetBoxIntgeralChange.TabIndex = 7;
+            this.txtBoxIntgeralChange.AcceptsReturn = true;
+            this.txtBoxIntgeralChange.Location = new System.Drawing.Point(224, 218);
+            this.txtBoxIntgeralChange.Name = "txtBoxIntgeralChange";
+            this.txtBoxIntgeralChange.Size = new System.Drawing.Size(146, 21);
+            this.txtBoxIntgeralChange.TabIndex = 7;
             // 
             // labConAmount
             // 
@@ -139,20 +142,23 @@ namespace MIMSystem
             // 
             // NewConsumpation
             // 
+            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(548, 360);
             this.Controls.Add(this.labIntegralChange);
             this.Controls.Add(this.labConAmount);
-            this.Controls.Add(this.tetBoxIntgeralChange);
-            this.Controls.Add(this.tetBoxConAmount);
-            this.Controls.Add(this.tetBoxMobile);
+            this.Controls.Add(this.txtBoxIntgeralChange);
+            this.Controls.Add(this.txtBoxConAmount);
+            this.Controls.Add(this.txtBoxMobile);
             this.Controls.Add(this.labMobile);
             this.Controls.Add(this.labConType);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbBoxConType);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "NewConsumpation";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NewConsumpation";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -163,12 +169,12 @@ namespace MIMSystem
 
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbBoxConType;
         private System.Windows.Forms.Label labConType;
         private System.Windows.Forms.Label labMobile;
-        private System.Windows.Forms.TextBox tetBoxMobile;
-        private System.Windows.Forms.TextBox tetBoxConAmount;
-        private System.Windows.Forms.TextBox tetBoxIntgeralChange;
+        private System.Windows.Forms.TextBox txtBoxMobile;
+        private System.Windows.Forms.TextBox txtBoxConAmount;
+        private System.Windows.Forms.TextBox txtBoxIntgeralChange;
         private System.Windows.Forms.Label labConAmount;
         private System.Windows.Forms.Label labIntegralChange;
     }

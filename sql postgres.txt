@@ -1,7 +1,3 @@
--- Schema: public
-
--- DROP SCHEMA public;
-
 CREATE TABLE users(
 Id serial,
 Username character varying(128),
@@ -15,7 +11,7 @@ Id serial,
 Mobile character varying(11),
 ConTimes integer,
 TotalConAmount integer,
-TotalIntegral integer,
+Totalintegral integer,
 PRIMARY KEY(Id)
 );
 
@@ -24,7 +20,7 @@ Id serial,
 Mobile character varying(11),
 ConType character varying,
 ConAmount integer,
-IntegralChange integer,
+integralChange integer,
 ConTime timestamp with time zone,
 PRIMARY KEY(Id)
 );

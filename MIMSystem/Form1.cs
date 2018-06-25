@@ -76,7 +76,7 @@ namespace MIMSystem
             //Form NewConsumpation = new Form();
 
             new NewConsumpation().ShowDialog();
-            this.Hide();
+            //this.Hide();
         }
     }
 }

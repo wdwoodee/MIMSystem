@@ -59,7 +59,7 @@ namespace MIMSystem.DLA
             {
                 using (NpgsqlConnection conn = new NpgsqlConnection(connectstr))
                 {
-                    conn.Open();
+                    //conn.Open();
                     using (NpgsqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = sql;
@@ -87,7 +87,6 @@ namespace MIMSystem.DLA
             {
                 using (NpgsqlConnection conn = new NpgsqlConnection(connectstr))
                 {
-                    conn.Open();
                     using (NpgsqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = sql;
@@ -131,6 +130,74 @@ namespace MIMSystem.DLA
             }
             return count;
         }
+
+
+        /// <summary>
+        /// 根据参数，插入数据到
+        /// </summary>
+        /// <param name="mobile"></param>
+        /// <param name="conTimes"></param>
+        /// <param name="conTotalAmount"></param>
+        /// <param name="conIntegral"></param>
+        /// <returns></returns>
+        public static int InsertCustomer(string mobile, int conTimes, int conTotalAmount, int conIntegral)
+        {
+            int affectCount = 0;
+            if (!String.IsNullOrEmpty(mobile))
+            {
+                string sqlInsertCustomer = string.Format("insert into customer(mobile,contimes,totalconamount,totalintegrel) values({0},{1},{2},{3})", mobile, conTimes, conTotalAmount, conIntegral);
+                affectCount = ExecuteNonQuery(sqlInsertCustomer);
+            }
+            else
+            {
+                return affectCount;
+            }
+            
+            return affectCount;
+        }
+
+        public static int UpdateCustomer(string mobile, int conTimes, int conTotalAmount, int conIntegral)
+        {
+            int affectCount = 0;
+            if (!String.IsNullOrEmpty(mobile))
+            {
+                string sqlInsertCustomer = string.Format("update customer set mobile={0},contimes={1},totalconamount={2},totalintegral={3}) where mobile='{4}'", mobile, conTimes, conTotalAmount, conIntegral, mobile);
+                affectCount = ExecuteNonQuery(sqlInsertCustomer);
+            }
+            else
+            {
+                return affectCount;
+            }
+
+            return affectCount;
+        }
+
+        /// <summary>
+        /// 根据参数更新Integrel表
+        /// </summary>
+        /// <param name="mobile"></param>
+        /// <param name="conType"></param>
+        /// <param name="conAmount"></param>
+        /// <param name="conIntegral"></param>
+        /// <returns></returns>
+        public static int InsertIntegrel(string mobile, string conType, int conAmount, int conIntegral)
+        {
+            int affectCount = 0;
+            //string date = DateTime.Now.Date.ToString();
+            if (!String.IsNullOrEmpty(mobile) && !String.IsNullOrEmpty(mobile))
+            {
+                string sqlInsertIntegrel = string.Format("insert into integral(mobile,contype,conamount,integralchange,contime) values({0},{1},{2},{3},now())", mobile, conType, conAmount, conIntegral);
+                affectCount = ExecuteNonQuery(sqlInsertIntegrel);
+            }
+            else
+            {
+                return affectCount;
+            }
+
+            return affectCount;
+        }
+
+
         #region common method
         //public static DataTable 
 
