@@ -20,3 +20,5 @@ G:\code\MIMSystem\MIMSystem\bin\Debug\Npgsql.xml
 G:\code\MIMSystem\MIMSystem\obj\Debug\MIMSystem.exe
 G:\code\MIMSystem\MIMSystem\obj\Debug\MIMSystem.pdb
 G:\code\MIMSystem\MIMSystem\obj\Debug\MIMSystem.NewConsumpation.resources
+G:\code\MIMSystem\MIMSystem\obj\Debug\MIMSystem.Login.resources
+G:\code\MIMSystem\MIMSystem\obj\Debug\MIMSystem.ChangePassword.resources

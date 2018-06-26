@@ -17,6 +17,38 @@ namespace MIMSystem
         {
             InitializeComponent();
             this.cmbBoxConType.SelectedIndex = 0;
+            
+            ToolTip ttpSettings = new ToolTip();
+
+            ttpSettings.InitialDelay = 200;
+
+            ttpSettings.AutoPopDelay = 10 * 1000;
+
+            ttpSettings.ReshowDelay = 200;
+
+            ttpSettings.ShowAlways = true;
+
+            ttpSettings.IsBalloon = true;
+
+            string tipOverwrite = "积分的示例：-100或者100";
+
+            ttpSettings.SetToolTip(txtBoxIntgeralChange, tipOverwrite);
+
+            ToolTip ttpSetting2 = new ToolTip();
+
+            ttpSetting2.InitialDelay = 200;
+
+            ttpSetting2.AutoPopDelay = 10 * 1000;
+
+            ttpSetting2.ReshowDelay = 200;
+
+            ttpSetting2.ShowAlways = true;
+
+            ttpSetting2.IsBalloon = true;
+
+            string tipOverwrite2 = "消费金额的示例：-100或者100";
+
+            ttpSetting2.SetToolTip(txtBoxConAmount, tipOverwrite2);
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -118,5 +150,8 @@ namespace MIMSystem
             //this.Hide();
             this.Close();
         }
+
+       
+        
     }
 }

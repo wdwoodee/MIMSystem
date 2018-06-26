@@ -20,6 +20,15 @@ namespace MIMSystem
         public Form1()
         {
             InitializeComponent();
+
+            ToolTip ttpSetting = new ToolTip();
+            ttpSetting.InitialDelay = 200;
+            ttpSetting.AutoPopDelay = 10 * 1000;
+            ttpSetting.ReshowDelay = 200;
+            ttpSetting.ShowAlways = true;
+            ttpSetting.IsBalloon = true;
+            string tipOverwrite2 = "请输入11位手机号码！";
+            ttpSetting.SetToolTip(txtBoxMobile, tipOverwrite2);
         }
 
         private void button1_Click(object sender, EventArgs e)

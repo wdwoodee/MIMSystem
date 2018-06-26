@@ -37,6 +37,7 @@ namespace MIMSystem
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.cmbBoxConType = new System.Windows.Forms.ComboBox();
@@ -47,6 +48,7 @@ namespace MIMSystem
             this.txtBoxIntgeralChange = new System.Windows.Forms.TextBox();
             this.labConAmount = new System.Windows.Forms.Label();
             this.labIntegralChange = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // btnOK
@@ -139,6 +141,7 @@ namespace MIMSystem
             this.labIntegralChange.Size = new System.Drawing.Size(65, 12);
             this.labIntegralChange.TabIndex = 9;
             this.labIntegralChange.Text = "积分变更：";
+            
             // 
             // NewConsumpation
             // 
@@ -159,7 +162,7 @@ namespace MIMSystem
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "NewConsumpation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "NewConsumpation";
+            this.Text = "会员积分管理系统";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,5 +180,6 @@ namespace MIMSystem
         private System.Windows.Forms.TextBox txtBoxIntgeralChange;
         private System.Windows.Forms.Label labConAmount;
         private System.Windows.Forms.Label labIntegralChange;
+        private ToolTip toolTip1;
     }
 }

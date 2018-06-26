@@ -107,6 +107,25 @@ namespace MIMSystem.DLA
         }
         #endregion
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public static SqlDataReader ExecuteReader(string sql)
+        {
+            using (SqlConnection conn = new SqlConnection(connectstr))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = sql;
+                    return cmd.ExecuteReader();
+                }
+            }
+        }
+
         public static int ExecuteScaler(string sql)
         {
             int count = 0;
@@ -130,6 +149,8 @@ namespace MIMSystem.DLA
             }
             return count;
         }
+        
+        
 
 
         /// <summary>
