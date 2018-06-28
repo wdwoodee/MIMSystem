@@ -87,5 +87,7 @@ namespace MIMSystem
             new NewConsumpation().ShowDialog();
             //this.Hide();
         }
+
+       
     }
 }
