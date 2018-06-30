@@ -17,7 +17,9 @@ namespace MIMSystem
         {
             InitializeComponent();
             this.cmbBoxConType.SelectedIndex = 0;
-            
+
+            #region 创建tooltip
+            //创建tooltip
             ToolTip ttpSettings = new ToolTip();
 
             ttpSettings.InitialDelay = 200;
@@ -31,8 +33,8 @@ namespace MIMSystem
             ttpSettings.IsBalloon = true;
 
             string tipOverwrite = "积分的示例：-100或者100";
+            ttpSettings.SetToolTip(txtBoxIntegral, tipOverwrite);
 
-            ttpSettings.SetToolTip(txtBoxIntgeralChange, tipOverwrite);
 
             ToolTip ttpSetting2 = new ToolTip();
 
@@ -46,9 +48,11 @@ namespace MIMSystem
 
             ttpSetting2.IsBalloon = true;
 
-            string tipOverwrite2 = "消费金额的示例：-100或者100";
+            string tipOverwrite2 = "金额的示例：-100，或者100";
+            //string tipOverwrite2 = "请输入变化积分，例如：-100，或者100。换购示例：-200 & 100，含义：减200，增加100";
 
             ttpSetting2.SetToolTip(txtBoxConAmount, tipOverwrite2);
+            #endregion
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -62,10 +66,11 @@ namespace MIMSystem
                 MessageBox.Show("请输入正确11位手机号码！");
                 return;
             }
+            
             int conAmount = 0; ;
             if (txtBoxConAmount.Text == null)
             {
-                MessageBox.Show("请输入消费金额，例如：100");
+                MessageBox.Show("请输入消费金额，例如：100或者-100");
                 return;
             }
             else
@@ -76,27 +81,50 @@ namespace MIMSystem
                 }
                 catch
                 {
-                    MessageBox.Show("请输入消费金额，例如：100");
+                    MessageBox.Show("请输入数值类型，例如：100或者-100");
                     return;
                 }
             }
-            int conIntegrel = 0;
-            if (txtBoxIntgeralChange.Text == null)
+            int conIntegrelChange = 0;
+            //int conIncreaseInte = 0;
+            //int conDecreaseInte = 0;
+            
+            //获取新增积分
+            if (txtBoxIntegral.Text == null)
             {
-                MessageBox.Show("请输入变化积分，例如：-100，或者100");
+                MessageBox.Show("请输入积分，例如：100或者-100");
                 return;
             }
             else
             {
                 try
                 {
-                    conIntegrel = Convert.ToInt32(txtBoxIntgeralChange.Text);
+                    conIntegrelChange = Convert.ToInt32(txtBoxIntegral.Text);
                 }
                 catch
                 {
-                    MessageBox.Show("请输入变化积分，例如：-100，或者100");
+                    MessageBox.Show("请输入数值类型数据，例如：100或者-100");
                 }
             }
+
+            ////获取减少积分
+            //if (txtBoxDecreaseInte.Text == null)
+            //{
+            //    MessageBox.Show("请输入新增积分，例如：-100，或者0");
+            //    return;
+            //}
+            //else
+            //{
+            //    try
+            //    {
+            //        conDecreaseInte = Convert.ToInt32(txtBoxDecreaseInte.Text);
+            //    }
+            //    catch
+            //    {
+            //        MessageBox.Show("请输入数值类型数据，例如：-100");
+            //    }
+            //}
+            //conIntegrelChange = conIncreaseInte + conDecreaseInte;
             #endregion
 
             //使用mobile查询customer表中是否有对应的customer
@@ -108,16 +136,16 @@ namespace MIMSystem
                 //为0，则表示新客户
                 conTimes = 1;
                 //更新Customer表
-                Postgres.InsertCustomer(mobile, conTimes, conAmount, conIntegrel);
+                Postgres.InsertCustomer(mobile, conTimes, conAmount, conIntegrelChange);
                 //更新Integrel表
-                Postgres.InsertIntegrel(mobile, conType, conAmount, conIntegrel);
+                Postgres.InsertIntegrel(mobile, conType, conAmount, conIntegrelChange);
             }
             else
             {
                 //不为0，则表示不是新客户
 
                 //更新Integrel表
-                Postgres.InsertIntegrel(mobile, conType, conAmount, conIntegrel);
+                Postgres.InsertIntegrel(mobile, conType, conAmount, conIntegrelChange);
 
                 //查询integrel表中消费的次数
                 string sqlQueryIntegrel = "select * from integral where mobile='" + mobile + "'";
@@ -147,11 +175,25 @@ namespace MIMSystem
         private void btnCancel_Click(object sender, EventArgs e)
         {
 
-            //this.Hide();
-            this.Close();
+            this.Hide();
+            //this.Close();
         }
 
-       
-        
+        /// <summary>
+        /// close此窗体时，重新load父窗体的数据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewConsumpation_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Form1 form1;
+            form1 = (Form1)this.Owner;
+            form1.reLoadDataForm1();
+        }
+
+
+
+
+
     }
 }

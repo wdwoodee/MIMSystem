@@ -22,6 +22,7 @@ namespace MIMSystem
         {
             InitializeComponent();
 
+            #region tooltip
             ToolTip ttpSetting = new ToolTip();
             ttpSetting.InitialDelay = 200;
             ttpSetting.AutoPopDelay = 10 * 1000;
@@ -30,12 +31,10 @@ namespace MIMSystem
             ttpSetting.IsBalloon = true;
             string tipOverwrite2 = "请输入11位手机号码！";
             ttpSetting.SetToolTip(txtBoxMobile, tipOverwrite2);
+            #endregion
 
-
-            DataTable top10Cus = new DataTable();
-            top10Cus = Postgres.GetTop10InteCustomer();
-            dataGridView2.DataSource = top10Cus;
-
+            //调用初始化数据方法；
+            reLoadDataForm1();
 
             // 设定包括Header和所有单元格的列宽自动调整
             dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -47,7 +46,7 @@ namespace MIMSystem
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
 
             #region test sqlite
@@ -78,85 +77,69 @@ namespace MIMSystem
             //string sqlUser = "select count(*) from users where Username = 'admin'";
             //int a = Postgres.ExecuteScaler(sqlUser);
             //Console.WriteLine(a);
+            //获取所有的table name
+            //string allTables = "select name from sqlite_master where type='table' order by name";
+            //DataTable dtAllTables = Postgres.ExecuteSQL(allTables);
+
+            //create table test
+            #endregion
+            
+            #region Test create table, postgresql
+            //string createTabUser = "Create Table User2(Username nvarchar(100) NOT NULL, Password nvarchar(100) NOT NULL)";
+            //Postgres.ExecuteNonQuery(createTabUser);
+
+            //string insert2 = "insert into User2(Username,password) values(dong,12345678);";
+            //Postgres.ExecuteSQL(insert2);
+
             #endregion
 
-            string sqlCustomer = @"select * from Customer where Mobile ='" + txtBoxMobile.Text + "'";
-            string sqlDetail = @"select * from Integral where Mobile ='" + txtBoxMobile.Text + "'";
-            string allTables = "select name from sqlite_master where type='table' order by name";
-            DataTable dtAllTables = Postgres.ExecuteSQL(allTables);
+            #region 根据mobile信息查询 customer
 
-            DataTable dtCustomer = Postgres.ExecuteSQL(sqlCustomer);
-            DataTable dtDetail = Postgres.ExecuteSQL(sqlDetail);
-
-            string createTabUser = "Create Table User2(Username nvarchar(100) NOT NULL, Password nvarchar(100) NOT NULL)";
-            Postgres.ExecuteNonQuery(createTabUser);
-            string insert2 = "insert into User2(Username,password) values(dong,12345678);";
-            Postgres.ExecuteSQL(insert2);
-
+            string sqlMobile = txtBoxMobile.Text.ToString();
+            if (sqlMobile == null || sqlMobile.Count() != 11)
+            {
+                MessageBox.Show("请输入正确11位手机号码！");
+                return;
+            }
+            else
+            {
+                DataTable dtCustomer = Postgres.GetInteCustomerByMobile(sqlMobile);
+                //查询的结果显示到data grid view
+                dataGridView2.DataSource = dtCustomer;
+            }
+            
+            #endregion
 
         }
 
         private void btnNewCon_Click(object sender, EventArgs e)
         {
-            Form NewConsumpation = new NewConsumpation();
-            NewConsumpation.ShowDialog();
+            Form newConFrom = new NewConsumpation();
+            newConFrom.Owner = this;
+            newConFrom.ShowDialog();
             //new NewConsumpation().ShowDialog();
-
             //this.Hide();
         }
 
 
-        // RowContextMenuStripNeeded事件处理方法 
-
-        //private void dataGridView2_RowContextMenuStripNeeded(object sender,
-
-        //    DataGridViewRowContextMenuStripNeededEventArgs e)
-        //{
-
-        //    DataGridView dgv = (DataGridView)sender;
-
-        //    // 当"Column1"列是Bool型且为True时、设定其的ContextMenuStrip 
-
-        //    string boolVal = dgv["电话", e.RowIndex].Value.ToString();
-
-        //    Console.WriteLine(boolVal);
-
-        //    //if (boolVal is bool && (bool)boolVal)
-        //    //{
-
-        //    //    e.ContextMenuStrip = this.ContextMenuStrip;
-
-        //    //}
-        //    if (boolVal.Length > 0)
-        //    {
-        //        e.ContextMenuStrip = this.ContextMenuStrip;
-        //    }
-
-        //}
-
-        //private void dataGridView2_RowContextMenuStripChanged(object sender, DataGridViewRowEventArgs e)
-        //{
-        //    dataGridView2.Rows[0].ContextMenuStrip = this.contextMenuStrip1; 
-        //}
-
-      
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string mobile;
-            DialogResult dr = MessageBox.Show("确认删除那客户记录吗？", "提示", MessageBoxButtons.OKCancel);
+            DialogResult dr = MessageBox.Show("确认删除此客户吗？", "提示", MessageBoxButtons.OKCancel);
             if (dr == DialogResult.OK)
             {
                 int a = dataGridView2.CurrentRow.Index;
-                mobile = dataGridView2.Rows[a].Cells[0].Value.ToString();
+                mobile = dataGridView2.Rows[a].Cells[1].Value.ToString();
                 if (mobile != null && mobile.Length > 0)
                 {
                     //删除customer表记录
                     string sqlDeleteCustomer = "delete from customer where mobile='" + mobile + "'";
 
                     //删除积分表记录
-                    string sqlDeleteIntegral = "delete form integral where moibile='"+ mobile +"'";
+                    string sqlDeleteIntegral = "delete from integral where mobile='" + mobile + "'";
                     Postgres.ExecuteNonQuery(sqlDeleteCustomer);
                     Postgres.ExecuteNonQuery(sqlDeleteIntegral);
+                    reLoadDataForm1();
                 }
             }
 
@@ -165,10 +148,13 @@ namespace MIMSystem
         private void 消费详情ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int a = dataGridView2.CurrentRow.Index;
-            mobileForDetailQuery = dataGridView2.Rows[a].Cells[0].Value.ToString();
+            mobileForDetailQuery = dataGridView2.Rows[a].Cells[1].Value.ToString();
             if (mobileForDetailQuery != null && mobileForDetailQuery.Length > 0)
             {
-                new ConsumpationDetail().ShowDialog();
+                //fuForm中打开ziForm时需要设置所有者，就是ziForm的所有者是fuForm
+                ConsumpationDetail conDetailForm = new ConsumpationDetail();
+                conDetailForm.Owner = this;
+                conDetailForm.ShowDialog();
             }
             else
             {
@@ -190,6 +176,12 @@ namespace MIMSystem
                 }
             }
         }
-       
+
+        public void reLoadDataForm1()
+        {
+            DataTable top10Cus = new DataTable();
+            top10Cus = Postgres.GetTop10InteCustomer();
+            dataGridView2.DataSource = top10Cus;
+        }
     }
 }

@@ -23,9 +23,14 @@ namespace MIMSystem
             dataGridViewDetail.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             //dataGridView2.Rows[0].ContextMenuStrip = this.contextMenuStrip1; 
 
+            //选中一行数据
             dataGridViewDetail.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            dataGridViewDetail.DataSource = Postgres.GetConDetail(Form1.mobileForDetailQuery);
+            //显示所查询数据
+            //dataGridViewDetail.DataSource = Postgres.GetConDetail(Form1.mobileForDetailQuery);
+            reloadData(Form1.mobileForDetailQuery);
+
+            
         }
 
         //设置datagridview的方法
@@ -65,9 +70,28 @@ namespace MIMSystem
 
                 Postgres.ExecuteNonQuery(sqldelete);
                 Postgres.RecalculateCustomer(moible);
-                dataGridViewDetail.DataSource = Postgres.GetConDetail(moible);
+                //dataGridViewDetail.DataSource = Postgres.GetConDetail(moible);
+                reloadData(moible);
             }
         }
+        public void reloadData(string mobile)
+        {
+            //显示初始化数据
+            dataGridViewDetail.DataSource = Postgres.GetConDetail(mobile);
+        }
 
+        //private void ConsumpationDetail_FormClosed(object sender, FormClosedEventArgs e)
+        //{
+        //    Form1 form1;
+        //    form1 = (Form1)this.Owner;
+        //    form1.reLoadFrom();
+        //}
+
+        private void ConsumpationDetail_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Form1 form1;
+            form1 = (Form1)this.Owner;
+            form1.reLoadDataForm1();
+        }
     }
 }
