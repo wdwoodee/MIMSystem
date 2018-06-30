@@ -22,3 +22,4 @@ G:\code\MIMSystem\MIMSystem\obj\Debug\MIMSystem.pdb
 G:\code\MIMSystem\MIMSystem\obj\Debug\MIMSystem.NewConsumpation.resources
 G:\code\MIMSystem\MIMSystem\obj\Debug\MIMSystem.Login.resources
 G:\code\MIMSystem\MIMSystem\obj\Debug\MIMSystem.ChangePassword.resources
+G:\code\MIMSystem\MIMSystem\obj\Debug\MIMSystem.ConsumpationDetail.resources

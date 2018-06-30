@@ -149,9 +149,101 @@ namespace MIMSystem.DLA
             }
             return count;
         }
-        
-        
 
+        #region common method
+
+        /// <summary>
+        /// 获取总金额前10的消费者
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetTop10InteCustomer()
+        {
+            string sqlGetTop10Cus = "select mobile as 电话, contimes as 总消费次数, totalconamount as 总消费金额, totalintegral as 总积分 from customer order by totalintegral desc limit 10;";
+            DataTable top10Cus = new DataTable();
+
+            #region
+            //try
+            //{
+            //    using (NpgsqlConnection conn = new NpgsqlConnection(connectstr))
+            //    {
+            //        //conn.Open();
+            //        using (NpgsqlCommand cmd = conn.CreateCommand())
+            //        {
+            //            cmd.CommandText = sqlGetTop10Cus;
+            //            cmd.CommandType = CommandType.Text;
+            //            using (NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd))
+            //            {
+            //                da.Fill(top10Cus);
+            //                cmd.Parameters.Clear();
+            //                return top10Cus;
+            //            }
+            //        }
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e);
+            //    return top10Cus;
+            //}
+            #endregion
+
+            top10Cus = ExecuteSQL(sqlGetTop10Cus);
+            return top10Cus;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mobile"></param>
+        /// <returns></returns>
+        public static DataTable GetConDetail(string mobile)
+        {
+            string sqlGetTop10Cus = string.Format(@"select id as 消费总排名, mobile as 电话, contype as 总消费类型, 
+conamount as 消费金额, integralchange as 积分变更, contime as 消费日期 from integral where mobile='{0}' order by contime desc;",mobile);
+            DataTable detial = new DataTable();
+
+            #region
+            //try
+            //{
+            //    using (NpgsqlConnection conn = new NpgsqlConnection(connectstr))
+            //    {
+            //        //conn.Open();
+            //        using (NpgsqlCommand cmd = conn.CreateCommand())
+            //        {
+            //            cmd.CommandText = sqlGetTop10Cus;
+            //            cmd.CommandType = CommandType.Text;
+            //            using (NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd))
+            //            {
+            //                da.Fill(detial);
+            //                cmd.Parameters.Clear();
+            //                return detial;
+            //            }
+            //        }
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e);
+            //    return detial;
+            //}
+            #endregion
+
+            detial = ExecuteSQL(sqlGetTop10Cus);
+            return detial;
+        }
+
+        /// <summary>
+        /// 消费金额前10的客户
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetTop10ConsAmountCustomer()
+        {
+            string sqlGetTop10Cus = "select mobile as 电话, contimes as 总消费次数, totalconamount as 总消费金额, totalintegral as 总积分 from customer order by totalconamount desc limit 10;";
+            DataTable top10Cus = new DataTable();
+
+            top10Cus = ExecuteSQL(sqlGetTop10Cus);
+            return top10Cus;
+        }
 
         /// <summary>
         /// 根据参数，插入数据到
@@ -219,8 +311,41 @@ namespace MIMSystem.DLA
         }
 
 
-        #region common method
-        //public static DataTable 
+        public static void RecalculateCustomer(string mobile)
+        {
+            int conTimes = 0;
+            //查询integrel表中消费的次数
+            string sqlQueryIntegrel = "select * from integral where mobile='" + mobile + "'";
+            DataTable dtIntegrel = new DataTable();
+            dtIntegrel = Postgres.ExecuteSQL(sqlQueryIntegrel);
+            
+            conTimes = dtIntegrel.Rows.Count;
+            if (conTimes == 0)
+            {
+                //已经全部删除消费记录，需要删除customer记录
+                string slqDeleteCustomer = "delete from customer where mobile='"+ mobile + "'";
+                ExecuteNonQuery(slqDeleteCustomer);
+            }
+            else
+            {
+                //还有消费记录，则需要重新计算customer表的值，消费总次数，消费总金额，总积分的更新
+                int conAmount2 = 0;
+                foreach (DataRow row in dtIntegrel.Rows)
+                {
+                    conAmount2 += Convert.ToInt32(row["conamount"]);
+                }
+                int conIntegrel2 = 0;
+                foreach (DataRow row in dtIntegrel.Rows)
+                {
+                    conIntegrel2 += Convert.ToInt32(row["integralchange"]);
+                }
+
+                //更新Customer表
+                Postgres.UpdateCustomer(mobile, conTimes, conAmount2, conIntegrel2);
+            }
+            
+        }
+        
 
         #endregion
     }

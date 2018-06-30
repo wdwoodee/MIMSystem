@@ -17,6 +17,7 @@ namespace MIMSystem
     public partial class Form1 : Form
     {
         //public static string connectionString = ConfigurationManager.ConnectionStrings["connectString"].ConnectionString;
+        public static string mobileForDetailQuery = string.Empty;
         public Form1()
         {
             InitializeComponent();
@@ -29,6 +30,21 @@ namespace MIMSystem
             ttpSetting.IsBalloon = true;
             string tipOverwrite2 = "请输入11位手机号码！";
             ttpSetting.SetToolTip(txtBoxMobile, tipOverwrite2);
+
+
+            DataTable top10Cus = new DataTable();
+            top10Cus = Postgres.GetTop10InteCustomer();
+            dataGridView2.DataSource = top10Cus;
+
+
+            // 设定包括Header和所有单元格的列宽自动调整
+            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            // 设定包括Header和所有单元格的行高自动调整
+            dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            //dataGridView2.Rows[0].ContextMenuStrip = this.contextMenuStrip1; 
+
+            dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -82,12 +98,98 @@ namespace MIMSystem
 
         private void btnNewCon_Click(object sender, EventArgs e)
         {
-            //Form NewConsumpation = new Form();
+            Form NewConsumpation = new NewConsumpation();
+            NewConsumpation.ShowDialog();
+            //new NewConsumpation().ShowDialog();
 
-            new NewConsumpation().ShowDialog();
             //this.Hide();
         }
 
+
+        // RowContextMenuStripNeeded事件处理方法 
+
+        //private void dataGridView2_RowContextMenuStripNeeded(object sender,
+
+        //    DataGridViewRowContextMenuStripNeededEventArgs e)
+        //{
+
+        //    DataGridView dgv = (DataGridView)sender;
+
+        //    // 当"Column1"列是Bool型且为True时、设定其的ContextMenuStrip 
+
+        //    string boolVal = dgv["电话", e.RowIndex].Value.ToString();
+
+        //    Console.WriteLine(boolVal);
+
+        //    //if (boolVal is bool && (bool)boolVal)
+        //    //{
+
+        //    //    e.ContextMenuStrip = this.ContextMenuStrip;
+
+        //    //}
+        //    if (boolVal.Length > 0)
+        //    {
+        //        e.ContextMenuStrip = this.ContextMenuStrip;
+        //    }
+
+        //}
+
+        //private void dataGridView2_RowContextMenuStripChanged(object sender, DataGridViewRowEventArgs e)
+        //{
+        //    dataGridView2.Rows[0].ContextMenuStrip = this.contextMenuStrip1; 
+        //}
+
+      
+        private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string mobile;
+            DialogResult dr = MessageBox.Show("确认删除那客户记录吗？", "提示", MessageBoxButtons.OKCancel);
+            if (dr == DialogResult.OK)
+            {
+                int a = dataGridView2.CurrentRow.Index;
+                mobile = dataGridView2.Rows[a].Cells[0].Value.ToString();
+                if (mobile != null && mobile.Length > 0)
+                {
+                    //删除customer表记录
+                    string sqlDeleteCustomer = "delete from customer where mobile='" + mobile + "'";
+
+                    //删除积分表记录
+                    string sqlDeleteIntegral = "delete form integral where moibile='"+ mobile +"'";
+                    Postgres.ExecuteNonQuery(sqlDeleteCustomer);
+                    Postgres.ExecuteNonQuery(sqlDeleteIntegral);
+                }
+            }
+
+        }
+
+        private void 消费详情ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int a = dataGridView2.CurrentRow.Index;
+            mobileForDetailQuery = dataGridView2.Rows[a].Cells[0].Value.ToString();
+            if (mobileForDetailQuery != null && mobileForDetailQuery.Length > 0)
+            {
+                new ConsumpationDetail().ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("非法查询！");
+            }
+        }
+
+        //dataGridView选中一行时右键出现菜单
+        private void dataGridView2_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.RowIndex >= 0)
+                {
+                    dataGridView2.ClearSelection();
+                    dataGridView2.Rows[e.RowIndex].Selected = true;
+                    dataGridView2.CurrentCell = dataGridView2.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+                }
+            }
+        }
        
     }
 }
