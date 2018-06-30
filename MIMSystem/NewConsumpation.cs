@@ -48,8 +48,8 @@ namespace MIMSystem
 
             ttpSetting2.IsBalloon = true;
 
-            string tipOverwrite2 = "金额的示例：-100，或者100";
-            //string tipOverwrite2 = "请输入变化积分，例如：-100，或者100。换购示例：-200 & 100，含义：减200，增加100";
+            //string tipOverwrite2 = "金额的示例：-100，或者100";
+            string tipOverwrite2 = "请输入变化积分，例如：-100，或者100。换购示例：-100。含义：减200，增加100，总数-100";
 
             ttpSetting2.SetToolTip(txtBoxConAmount, tipOverwrite2);
             #endregion
@@ -106,25 +106,7 @@ namespace MIMSystem
                     MessageBox.Show("请输入数值类型数据，例如：100或者-100");
                 }
             }
-
-            ////获取减少积分
-            //if (txtBoxDecreaseInte.Text == null)
-            //{
-            //    MessageBox.Show("请输入新增积分，例如：-100，或者0");
-            //    return;
-            //}
-            //else
-            //{
-            //    try
-            //    {
-            //        conDecreaseInte = Convert.ToInt32(txtBoxDecreaseInte.Text);
-            //    }
-            //    catch
-            //    {
-            //        MessageBox.Show("请输入数值类型数据，例如：-100");
-            //    }
-            //}
-            //conIntegrelChange = conIncreaseInte + conDecreaseInte;
+            
             #endregion
 
             //使用mobile查询customer表中是否有对应的customer
