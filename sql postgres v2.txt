@@ -1,0 +1,61 @@
+CREATE TABLE users(
+id serial,
+username character varying,
+password character varying,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE members(
+id serial,
+username character varying,
+mobile character varying,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE consumpationsummary(
+id serial,
+mid integer;
+ConTimes integer,
+TotalConAmount integer,
+Totalintegral integer,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE consumpationdetail(
+id serial,
+mid integer,
+contype character varying,
+conamount integer,
+integralchange integer,
+contime timestamp with time zone,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE consumpationcategory(
+id serial,
+conype character varying,
+PRIMARY KEY(id)
+);
+
+CREATE INDEX index_user ON users (Username);
+CREATE INDEX index_membership ON membership (username);
+CREATE INDEX index_membership2 ON membership (mobile);
+CREATE INDEX index_customer ON customer (Mobile);
+CREATE INDEX index_integral ON integral (Mobile);
+CREATE INDEX index_category ON category (ConTypeId);
+
+CREATE INDEX index_user2 ON users (id);
+CREATE INDEX index_membership3 ON membership (id);
+CREATE INDEX index_customer2 ON customer (id);
+CREATE INDEX index_integral2 ON integral (id);
+CREATE INDEX index_category2 ON category (id);
+
+drop index index_user;
+drop index index_customer;
+drop index index_integral;
+drop index index_category;
+
+customer -> membershipintegral
+
+integer -> consumpationdetail
+
