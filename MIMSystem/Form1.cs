@@ -29,7 +29,7 @@ namespace MIMSystem
             ttpSetting.ReshowDelay = 200;
             ttpSetting.ShowAlways = true;
             ttpSetting.IsBalloon = true;
-            string tipOverwrite2 = "请输入11位手机号码！";
+            string tipOverwrite2 = "请输入会员名称或者手机号码！";
             ttpSetting.SetToolTip(txtBoxMobile, tipOverwrite2);
             #endregion
 
@@ -96,9 +96,9 @@ namespace MIMSystem
             #region 根据mobile信息查询 customer
 
             string sqlMobile = txtBoxMobile.Text.ToString();
-            if (sqlMobile == null || sqlMobile.Count() != 11)
+            if (sqlMobile == null)
             {
-                MessageBox.Show("请输入正确11位手机号码！");
+                MessageBox.Show("请输入查询！");
                 return;
             }
             else

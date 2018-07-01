@@ -73,7 +73,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ConsumpationDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "会员积分管理系统";
+            this.Text = "孔氏布鞋积分记录";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConsumpationDetail_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDetail)).EndInit();
             this.contextMenuStripDetail.ResumeLayout(false);

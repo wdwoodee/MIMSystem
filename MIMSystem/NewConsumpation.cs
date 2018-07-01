@@ -48,8 +48,8 @@ namespace MIMSystem
 
             ttpSetting2.IsBalloon = true;
 
-            //string tipOverwrite2 = "金额的示例：-100，或者100";
-            string tipOverwrite2 = "请输入变化积分，例如：-100，或者100。换购示例：-100。含义：减200，增加100，总数-100";
+            string tipOverwrite2 = "金额的示例：-100，或者100";
+            //string tipOverwrite2 = "请输入变化积分，例如：-100，或者100。换购示例：-100。含义：减200，增加100，总数-100";
 
             ttpSetting2.SetToolTip(txtBoxConAmount, tipOverwrite2);
             #endregion

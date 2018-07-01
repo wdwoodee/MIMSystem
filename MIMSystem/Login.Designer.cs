@@ -105,7 +105,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "会员积分管理系统";
+            this.Text = "孔氏布鞋积分记录";
             this.ResumeLayout(false);
             this.PerformLayout();
 

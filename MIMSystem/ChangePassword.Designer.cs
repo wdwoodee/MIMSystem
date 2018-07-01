@@ -146,7 +146,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ChangePassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "会员积分系统";
+            this.Text = "孔氏布鞋积分记录";
             this.ResumeLayout(false);
             this.PerformLayout();
 
