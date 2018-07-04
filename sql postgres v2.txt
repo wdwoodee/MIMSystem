@@ -14,16 +14,16 @@ PRIMARY KEY(id)
 
 CREATE TABLE consumpationsummary(
 id serial,
-mid integer;
-ConTimes integer,
-TotalConAmount integer,
-Totalintegral integer,
+mid serial references members(id),
+contimes integer,
+totalconamount integer,
+totalintegral integer,
 PRIMARY KEY(id)
 );
 
 CREATE TABLE consumpationdetail(
 id serial,
-mid integer,
+mid serial references members(id),
 contype character varying,
 conamount integer,
 integralchange integer,
@@ -37,25 +37,23 @@ conype character varying,
 PRIMARY KEY(id)
 );
 
-CREATE INDEX index_user ON users (Username);
-CREATE INDEX index_membership ON membership (username);
-CREATE INDEX index_membership2 ON membership (mobile);
-CREATE INDEX index_customer ON customer (Mobile);
-CREATE INDEX index_integral ON integral (Mobile);
-CREATE INDEX index_category ON category (ConTypeId);
+CREATE INDEX index_user ON users (username);
+CREATE INDEX index_members1 ON members (username);
+CREATE INDEX index_members2 ON members (mobile);
 
 CREATE INDEX index_user2 ON users (id);
-CREATE INDEX index_membership3 ON membership (id);
-CREATE INDEX index_customer2 ON customer (id);
-CREATE INDEX index_integral2 ON integral (id);
-CREATE INDEX index_category2 ON category (id);
+CREATE INDEX index_members3 ON members (id);
+CREATE INDEX index_consumpationsummary ON consumpationsummary (id);
+CREATE INDEX index_consumpationcategory ON consumpationcategory (id);
+CREATE INDEX index_consumpationdetail ON consumpationdetail (id);
 
 drop index index_user;
 drop index index_customer;
 drop index index_integral;
 drop index index_category;
 
-customer -> membershipintegral
+customer -> consumpationsummary
 
 integer -> consumpationdetail
 
+category -> consumpationcategory

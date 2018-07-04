@@ -111,15 +111,7 @@ namespace MIMSystem
             #endregion
 
         }
-
-        private void btnNewCon_Click(object sender, EventArgs e)
-        {
-            Form newConFrom = new NewConsumpation();
-            newConFrom.Owner = this;
-            newConFrom.ShowDialog();
-            //new NewConsumpation().ShowDialog();
-            //this.Hide();
-        }
+       
 
 
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -182,6 +174,20 @@ namespace MIMSystem
             DataTable top10Cus = new DataTable();
             top10Cus = Postgres.GetTop10InteCustomer();
             dataGridView2.DataSource = top10Cus;
+        }
+
+        private void 修改电话号码ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 消费ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form newConFrom = new NewConsumpation();
+            newConFrom.Owner = this;
+            newConFrom.ShowDialog();
+            //new NewConsumpation().ShowDialog();
+            //this.Hide();
         }
     }
 }

@@ -32,19 +32,23 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.btnNewCon = new System.Windows.Forms.Button();
             this.txtBoxMobile = new System.Windows.Forms.TextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.消费详情ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.客户ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.修改电话号码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.消费ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(350, 26);
+            this.btnSearch.Location = new System.Drawing.Point(353, 28);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(50, 23);
             this.btnSearch.TabIndex = 0;
@@ -52,19 +56,9 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // btnNewCon
-            // 
-            this.btnNewCon.Location = new System.Drawing.Point(69, 26);
-            this.btnNewCon.Name = "btnNewCon";
-            this.btnNewCon.Size = new System.Drawing.Size(50, 23);
-            this.btnNewCon.TabIndex = 1;
-            this.btnNewCon.Text = "新消费";
-            this.btnNewCon.UseVisualStyleBackColor = true;
-            this.btnNewCon.Click += new System.EventHandler(this.btnNewCon_Click);
-            // 
             // txtBoxMobile
             // 
-            this.txtBoxMobile.Location = new System.Drawing.Point(423, 27);
+            this.txtBoxMobile.Location = new System.Drawing.Point(423, 28);
             this.txtBoxMobile.Name = "txtBoxMobile";
             this.txtBoxMobile.Size = new System.Drawing.Size(121, 21);
             this.txtBoxMobile.TabIndex = 2;
@@ -87,7 +81,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView2.GridColor = System.Drawing.SystemColors.Control;
-            this.dataGridView2.Location = new System.Drawing.Point(69, 81);
+            this.dataGridView2.Location = new System.Drawing.Point(27, 82);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -99,7 +93,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(475, 301);
+            this.dataGridView2.Size = new System.Drawing.Size(540, 301);
             this.dataGridView2.TabIndex = 4;
             this.dataGridView2.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseUp);
             // 
@@ -125,6 +119,39 @@
             this.消费详情ToolStripMenuItem.Text = "消费详情";
             this.消费详情ToolStripMenuItem.Click += new System.EventHandler(this.消费详情ToolStripMenuItem_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.客户ToolStripMenuItem,
+            this.消费ToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(600, 25);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // 客户ToolStripMenuItem
+            // 
+            this.客户ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.修改电话号码ToolStripMenuItem});
+            this.客户ToolStripMenuItem.Name = "客户ToolStripMenuItem";
+            this.客户ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.客户ToolStripMenuItem.Text = "客户";
+            // 
+            // 修改电话号码ToolStripMenuItem
+            // 
+            this.修改电话号码ToolStripMenuItem.Name = "修改电话号码ToolStripMenuItem";
+            this.修改电话号码ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.修改电话号码ToolStripMenuItem.Text = "修改电话号码";
+            this.修改电话号码ToolStripMenuItem.Click += new System.EventHandler(this.修改电话号码ToolStripMenuItem_Click);
+            // 
+            // 消费ToolStripMenuItem
+            // 
+            this.消费ToolStripMenuItem.Name = "消费ToolStripMenuItem";
+            this.消费ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.消费ToolStripMenuItem.Text = "消费";
+            this.消费ToolStripMenuItem.Click += new System.EventHandler(this.消费ToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnSearch;
@@ -132,16 +159,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(600, 434);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.txtBoxMobile);
-            this.Controls.Add(this.btnNewCon);
             this.Controls.Add(this.btnSearch);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "孔氏布鞋积分记录";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,12 +180,15 @@
         #endregion
 
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.Button btnNewCon;
         private System.Windows.Forms.TextBox txtBoxMobile;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 消费详情ToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 客户ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 修改电话号码ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 消费ToolStripMenuItem;
         
     }
 }

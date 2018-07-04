@@ -47,7 +47,7 @@ namespace MIMSystem
         private static void UserCheck()
         {
             string sqlUser = "select count(*) from users";
-            string sqlInsertUser = "insert users(username,password) values('admin','admin')";
+            string sqlInsertUser = "insert into users(username,password) values('admin','admin')";
             if (Convert.ToInt32(Postgres.ExecuteScaler(sqlUser)) < 1)
             {
                 Postgres.ExecuteNonQuery(sqlInsertUser);

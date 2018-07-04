@@ -158,7 +158,7 @@ namespace MIMSystem.DLA
         /// <returns></returns>
         public static DataTable GetTop10InteCustomer()
         {
-            string sqlGetTop10Cus = "select id as 用户排名, mobile as 电话, contimes as 总消费次数, totalconamount as 总消费金额, totalintegral as 总积分 from customer order by totalintegral desc limit 10;";
+            string sqlGetTop10Cus = "select id as 用户排名, mobile as 电话, contimes as 总消费次数, totalconamount as 总消费金额, totalintegral as 总积分 from consumpationsummary order by totalintegral desc limit 10;";
             DataTable top10Cus = new DataTable();
 
             #region
@@ -193,7 +193,7 @@ namespace MIMSystem.DLA
 
         public static DataTable GetInteCustomerByMobile(string mobile)
         {
-            string sqlGetTop10Cus = string.Format("select id as 用户排名, mobile as 电话, contimes as 总消费次数, totalconamount as 总消费金额, totalintegral as 总积分 from customer where mobile ='{0}' order by totalintegral desc limit 10;", mobile);
+            string sqlGetTop10Cus = string.Format("select id as 用户排名, mobile as 电话, contimes as 总消费次数, totalconamount as 总消费金额, totalintegral as 总积分 from consumpationsummary where mobile ='{0}' order by totalintegral desc limit 10;", mobile);
             DataTable top10Cus = new DataTable();
             top10Cus = ExecuteSQL(sqlGetTop10Cus);
             return top10Cus;
@@ -207,7 +207,7 @@ namespace MIMSystem.DLA
         public static DataTable GetConDetail(string mobile)
         {
             string sqlGetTop10Cus = string.Format(@"select id as 消费次数排名, mobile as 电话, contype as 总消费类型, 
-conamount as 消费金额, integralchange as 积分变更, contime as 消费日期 from integral where mobile='{0}' order by contime desc;",mobile);
+conamount as 消费金额, integralchange as 积分变更, contime as 消费日期 from consumpationdetail where mobile='{0}' order by contime desc;", mobile);
             DataTable detial = new DataTable();
 
             #region
@@ -246,7 +246,7 @@ conamount as 消费金额, integralchange as 积分变更, contime as 消费日�
         /// <returns></returns>
         public static DataTable GetTop10ConsAmountCustomer()
         {
-            string sqlGetTop10Cus = "select mobile as 电话, contimes as 总消费次数, totalconamount as 总消费金额, totalintegral as 总积分 from customer order by totalconamount desc limit 10;";
+            string sqlGetTop10Cus = "select mobile as 电话, contimes as 总消费次数, totalconamount as 总消费金额, totalintegral as 总积分 from consumpationsummary order by totalconamount desc limit 10;";
             DataTable top10Cus = new DataTable();
 
             top10Cus = ExecuteSQL(sqlGetTop10Cus);
@@ -261,12 +261,12 @@ conamount as 消费金额, integralchange as 积分变更, contime as 消费日�
         /// <param name="conTotalAmount"></param>
         /// <param name="conIntegral"></param>
         /// <returns></returns>
-        public static int InsertCustomer(string mobile, int conTimes, int conTotalAmount, int conIntegral)
+        public static int InsertCustomer(string mid, int conTimes, int conTotalAmount, int conIntegral)
         {
             int affectCount = 0;
-            if (!String.IsNullOrEmpty(mobile))
+            if (!String.IsNullOrEmpty(mid))
             {
-                string sqlInsertCustomer = string.Format("insert into customer(mobile,contimes,totalconamount,totalintegral) values({0},{1},{2},{3})", mobile, conTimes, conTotalAmount, conIntegral);
+                string sqlInsertCustomer = string.Format("insert into consumpationsummary(mid,contimes,totalconamount,totalintegral) values({0},{1},{2},{3})", mid, conTimes, conTotalAmount, conIntegral);
                 affectCount = ExecuteNonQuery(sqlInsertCustomer);
             }
             else
@@ -282,7 +282,7 @@ conamount as 消费金额, integralchange as 积分变更, contime as 消费日�
             int affectCount = 0;
             if (!String.IsNullOrEmpty(mobile))
             {
-                string sqlInsertCustomer = string.Format("update customer set mobile={0},contimes={1},totalconamount={2},totalintegral={3} where mobile='{4}'", mobile, conTimes, conTotalAmount, conIntegral, mobile);
+                string sqlInsertCustomer = string.Format("update consumpationsummary set mobile={0},contimes={1},totalconamount={2},totalintegral={3} where mobile='{4}'", mobile, conTimes, conTotalAmount, conIntegral, mobile);
                 affectCount = ExecuteNonQuery(sqlInsertCustomer);
             }
             else
@@ -307,7 +307,7 @@ conamount as 消费金额, integralchange as 积分变更, contime as 消费日�
             //string date = DateTime.Now.Date.ToString();
             if (!String.IsNullOrEmpty(mobile) && !String.IsNullOrEmpty(mobile))
             {
-                string sqlInsertIntegrel = string.Format("insert into integral(mobile,contype,conamount,integralchange,contime) values({0},'{1}',{2},{3},now())", mobile, conType, conAmount, conIntegral);
+                string sqlInsertIntegrel = string.Format("insert into consumpationdetail(mobile,contype,conamount,integralchange,contime) values({0},'{1}',{2},{3},now())", mobile, conType, conAmount, conIntegral);
                 affectCount = ExecuteNonQuery(sqlInsertIntegrel);
             }
             else
@@ -323,7 +323,7 @@ conamount as 消费金额, integralchange as 积分变更, contime as 消费日�
         {
             int conTimes = 0;
             //查询integrel表中消费的次数
-            string sqlQueryIntegrel = "select * from integral where mobile='" + mobile + "'";
+            string sqlQueryIntegrel = "select * from consumpationdetail where mobile='" + mobile + "'";
             DataTable dtIntegrel = new DataTable();
             dtIntegrel = Postgres.ExecuteSQL(sqlQueryIntegrel);
             
@@ -331,7 +331,7 @@ conamount as 消费金额, integralchange as 积分变更, contime as 消费日�
             if (conTimes == 0)
             {
                 //已经全部删除消费记录，需要删除customer记录
-                string slqDeleteCustomer = "delete from customer where mobile='"+ mobile + "'";
+                string slqDeleteCustomer = "delete from consumpationsummary where mobile='" + mobile + "'";
                 ExecuteNonQuery(slqDeleteCustomer);
             }
             else
