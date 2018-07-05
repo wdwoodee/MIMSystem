@@ -66,7 +66,7 @@ namespace MIMSystem
                 MessageBox.Show("请输入正确11位手机号码！");
                 return;
             }
-            
+
             int conAmount = 0; ;
             if (txtBoxConAmount.Text == null)
             {
@@ -88,7 +88,7 @@ namespace MIMSystem
             int conIntegrelChange = 0;
             //int conIncreaseInte = 0;
             //int conDecreaseInte = 0;
-            
+
             //获取新增积分
             if (txtBoxIntegral.Text == null)
             {
@@ -106,33 +106,40 @@ namespace MIMSystem
                     MessageBox.Show("请输入数值类型数据，例如：100或者-100");
                 }
             }
-            
+
             #endregion
 
-            //使用mobile查询customer表中是否有对应的customer
-            string sqlQuery = "select mobile from customer where mobile='" + mobile + "'";
+            //使用mobile查询members表中是否有对应的members,记录唯一
+            string sqlQuery = "select * from members where mobile='" + mobile + "'";
             DataTable custmoer = Postgres.ExecuteSQL(sqlQuery);
             int conTimes = 0;
             if (custmoer.Rows.Count == 0)
             {
+                #region old code
                 //为0，则表示新客户
-                conTimes = 1;
-                //更新Customer表
-                Postgres.InsertCustomer(mobile, conTimes, conAmount, conIntegrelChange);
-                //更新Integrel表
-                Postgres.InsertIntegrel(mobile, conType, conAmount, conIntegrelChange);
+                //conTimes = 1;
+                ////更新Customer表
+                //Postgres.InsertCustomer(mobile, conTimes, conAmount, conIntegrelChange);
+                ////更新Integrel表
+                //Postgres.InsertIntegrel(mobile, conType, conAmount, conIntegrelChange);
+                #endregion
+
+                MessageBox.Show("新顾客，请先添加会员！");
+                return;
             }
             else
             {
                 //不为0，则表示不是新客户
+                string id = custmoer.Rows[0]["id"].ToString();
+                string name = custmoer.Rows[0]["username"].ToString();
 
-                //更新Integrel表
-                Postgres.InsertIntegrel(mobile, conType, conAmount, conIntegrelChange);
+                //更新consumpationdetail表
+                Postgres.InsertConDetail(id, conType, conAmount, conIntegrelChange);
 
-                //查询integrel表中消费的次数
-                string sqlQueryIntegrel = "select * from integral where mobile='" + mobile + "'";
+                //查询consupationdetail表中消费的次数
                 DataTable dtIntegrel = new DataTable();
-                dtIntegrel = Postgres.ExecuteSQL(sqlQueryIntegrel);
+                dtIntegrel = Postgres.GetConDetailsByMid(id);
+
                 conTimes = dtIntegrel.Rows.Count;
                 int conAmount2 = 0;
                 foreach (DataRow row in dtIntegrel.Rows)
@@ -145,8 +152,19 @@ namespace MIMSystem
                     conIntegrel2 += Convert.ToInt32(row["integralchange"]);
                 }
 
-                //更新Customer表
-                Postgres.UpdateCustomer(mobile, conTimes, conAmount2, conIntegrel2);
+                string sqlSelectSummary = "select count(*) from consumptionsummary where mid='" + id + "'";
+
+                DataTable dt = Postgres.ExecuteSQL(sqlSelectSummary);
+
+                if (dt.Rows.Count > 0)
+                {
+                    //如果不是第一次插入，则更新
+                    Postgres.UpdateConSummary(id, conTimes, conAmount2, conIntegrel2);
+                }
+                {
+                    //否则，插入
+                    Postgres.InsertConSummary(id, conTimes, conAmount2, conIntegrel2);
+                }
 
             }
             this.Hide();

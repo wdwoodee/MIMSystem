@@ -30,7 +30,7 @@ namespace MIMSystem
             ttpSetting.ShowAlways = true;
             ttpSetting.IsBalloon = true;
             string tipOverwrite2 = "请输入会员名称或者手机号码！";
-            ttpSetting.SetToolTip(txtBoxMobile, tipOverwrite2);
+            ttpSetting.SetToolTip(txtBoxSearch, tipOverwrite2);
             #endregion
 
             //调用初始化数据方法；
@@ -93,17 +93,17 @@ namespace MIMSystem
 
             #endregion
 
-            #region 根据mobile信息查询 customer
+            #region 根据mobile信息查询Summary
 
-            string sqlMobile = txtBoxMobile.Text.ToString();
-            if (sqlMobile == null)
+            string sqlSearch = txtBoxSearch.Text.ToString();
+            if (string.IsNullOrEmpty(sqlSearch))
             {
-                MessageBox.Show("请输入查询！");
+                MessageBox.Show("请输入会员名或者电话！");
                 return;
             }
             else
             {
-                DataTable dtCustomer = Postgres.GetInteCustomerByMobile(sqlMobile);
+                DataTable dtCustomer = Postgres.GetSummaryBySearchText(sqlSearch);
                 //查询的结果显示到data grid view
                 dataGridView2.DataSource = dtCustomer;
             }
@@ -140,7 +140,7 @@ namespace MIMSystem
         private void 消费详情ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int a = dataGridView2.CurrentRow.Index;
-            mobileForDetailQuery = dataGridView2.Rows[a].Cells[1].Value.ToString();
+            mobileForDetailQuery = dataGridView2.Rows[a].Cells[0].Value.ToString();
             if (mobileForDetailQuery != null && mobileForDetailQuery.Length > 0)
             {
                 //fuForm中打开ziForm时需要设置所有者，就是ziForm的所有者是fuForm
@@ -172,13 +172,15 @@ namespace MIMSystem
         public void reLoadDataForm1()
         {
             DataTable top10Cus = new DataTable();
-            top10Cus = Postgres.GetTop10InteCustomer();
+            top10Cus = Postgres.GetTop10Summary();
             dataGridView2.DataSource = top10Cus;
         }
 
-        private void 修改电话号码ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 添加会员ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form addMem = new AddMember();
+            addMem.Owner = this;
+            addMem.ShowDialog();
         }
 
         private void 消费ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -188,6 +190,11 @@ namespace MIMSystem
             newConFrom.ShowDialog();
             //new NewConsumpation().ShowDialog();
             //this.Hide();
+        }
+
+        private void 修改电话号码ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

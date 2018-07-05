@@ -3,7 +3,7 @@ id serial,
 username character varying not null,
 password character varying not null,
 PRIMARY KEY(id),
-constraint uk_users_unique_u_m unique(username)
+constraint uk_users_unique_name unique(username)
 );
 
 CREATE TABLE members(
@@ -11,10 +11,10 @@ id serial,
 username character varying,
 mobile character varying,
 PRIMARY KEY(id),
-constraint uk_members_unique_u_m unique(username,mobile)
+constraint uk_members_unique_mobile unique(mobile)
 );
 
-CREATE TABLE consumpationsummary(
+CREATE TABLE consumptionsummary(
 id serial,
 mid serial references members(id),
 contimes integer,
@@ -23,7 +23,7 @@ totalintegral integer,
 PRIMARY KEY(id)
 );
 
-CREATE TABLE consumpationdetail(
+CREATE TABLE consumptiondetail(
 id serial,
 mid serial references members(id),
 contype character varying,
@@ -33,7 +33,7 @@ contime timestamp with time zone,
 PRIMARY KEY(id)
 );
 
-CREATE TABLE consumpationcategory(
+CREATE TABLE consumptioncategory(
 id serial,
 conype character varying,
 PRIMARY KEY(id)
@@ -46,19 +46,28 @@ CREATE INDEX index_members3 ON members (id);
 CREATE INDEX index_members4 ON members (username,mobile);
 
 CREATE INDEX index_user2 ON users (id);
-CREATE INDEX index_consumpationsummary ON consumpationsummary (id);
-CREATE INDEX index_consumpationcategory ON consumpationcategory (id);
-CREATE INDEX index_consumpationdetail ON consumpationdetail (id);
+CREATE INDEX index_consumptionsummary ON consumptionsummary (id);
+CREATE INDEX index_consumptioncategory ON consumptioncategory (id);
+CREATE INDEX index_consumptiondetail ON consumptiondetail (id);
 
 
+
+
+CREATE TABLE members(
+id serial,
+username character varying,
+mobile character varying,
+PRIMARY KEY(id),
+constraint uk_members_unique_u_m unique(username,mobile)
+);
 
 drop index index_user;
 drop index index_customer;
 drop index index_integral;
 drop index index_category;
 
-customer -> consumpationsummary
+customer -> consumptionsummary
 
-integer -> consumpationdetail
+integer -> consumptiondetail
 
-category -> consumpationcategory
+category -> consumptioncategory

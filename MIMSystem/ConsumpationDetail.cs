@@ -74,10 +74,10 @@ namespace MIMSystem
                 reloadData(moible);
             }
         }
-        public void reloadData(string mobile)
+        public void reloadData(string mid)
         {
             //显示初始化数据
-            dataGridViewDetail.DataSource = Postgres.GetConDetail(mobile);
+            dataGridViewDetail.DataSource = Postgres.GetConDetailsforDisply(mid);
         }
 
         //private void ConsumpationDetail_FormClosed(object sender, FormClosedEventArgs e)
