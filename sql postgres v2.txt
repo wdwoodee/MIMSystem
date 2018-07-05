@@ -1,15 +1,17 @@
 CREATE TABLE users(
 id serial,
-username character varying,
-password character varying,
-PRIMARY KEY(id)
+username character varying not null,
+password character varying not null,
+PRIMARY KEY(id),
+constraint uk_users_unique_u_m unique(username)
 );
 
 CREATE TABLE members(
 id serial,
 username character varying,
 mobile character varying,
-PRIMARY KEY(id)
+PRIMARY KEY(id),
+constraint uk_members_unique_u_m unique(username,mobile)
 );
 
 CREATE TABLE consumpationsummary(
@@ -40,12 +42,15 @@ PRIMARY KEY(id)
 CREATE INDEX index_user ON users (username);
 CREATE INDEX index_members1 ON members (username);
 CREATE INDEX index_members2 ON members (mobile);
+CREATE INDEX index_members3 ON members (id);
+CREATE INDEX index_members4 ON members (username,mobile);
 
 CREATE INDEX index_user2 ON users (id);
-CREATE INDEX index_members3 ON members (id);
 CREATE INDEX index_consumpationsummary ON consumpationsummary (id);
 CREATE INDEX index_consumpationcategory ON consumpationcategory (id);
 CREATE INDEX index_consumpationdetail ON consumpationdetail (id);
+
+
 
 drop index index_user;
 drop index index_customer;
