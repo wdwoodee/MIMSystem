@@ -158,7 +158,7 @@ namespace MIMSystem.DLA
         /// <returns></returns>
         public static DataTable GetTop10Summary()
         {
-            string sqlGetTop10Cus = @"select s.mid as 用户排名, m.username as 会员名, m.mobile as 电话, s.contimes as 总消费次数, s.totalconamount as 总消费金额,
+            string sqlGetTop10Cus = @"select s.mid as 会员排名, m.username as 会员, m.mobile as 电话, s.contimes as 总消费次数, s.totalconamount as 总消费金额,
 s.totalintegral as 总积分 from consumptionsummary as s,members as m where s.mid=m.id order by totalintegral desc limit 10;";
             DataTable top10Cus = new DataTable();
 
@@ -192,14 +192,34 @@ s.totalintegral as 总积分 from consumptionsummary as s,members as m where s.m
             return top10Cus;
         }
 
+
+        /// <summary>
+        /// search summary
+        /// </summary>
+        /// <param name="searchText"></param>
+        /// <returns></returns>
         public static DataTable GetSummaryBySearchText(string searchText)
         {
-            string sqlGetTop10Cus = string.Format(@"select s.mid as 用户排名, m.username as 会员名, m.mobile as 电话, s.contimes as 总消费次数, s.totalconamount as 总消费金额,
+            string sqlGetTop10Cus = string.Format(@"select s.mid as 会员排名, m.username as 会员, m.mobile as 电话, s.contimes as 总消费次数, s.totalconamount as 总消费金额,
 s.totalintegral as 总积分 from consumptionsummary as s,members as m where s.mid=m.id and m.username='{0}' or m.mobile='{0}';", searchText);
             DataTable top10Cus = new DataTable();
             top10Cus = ExecuteSQL(sqlGetTop10Cus);
             return top10Cus;
         }
+
+        /// <summary>
+        /// 获取所有会员
+        /// </summary>
+        /// <param name="searchText"></param>
+        /// <returns></returns>
+        public static DataTable GetMemberBySearchText(string searchText)
+        {
+            DataTable dt = new DataTable();
+            string sqlSearch = "select id as 会员排名, username as 会员, mobile as 电话号码 from members where username='" + searchText + "'" + "or mobile='" + searchText + "'";
+            dt = ExecuteSQL(sqlSearch);
+            return dt;
+        }
+
 
         /// <summary>
         /// 
@@ -209,8 +229,8 @@ s.totalintegral as 总积分 from consumptionsummary as s,members as m where s.m
         public static DataTable GetConDetailsforDisply(string mid)
         {
             //联合查询，需要加上member表
-            string sqlGetTop10Cus = string.Format(@"select id as 消费次数排名, mobile as 电话, contype as 总消费类型, 
-conamount as 消费金额, integralchange as 积分变更, contime as 消费日期 from consumptiondetail where mid='{0}' order by contime desc;", mid);
+            string sqlGetTop10Cus = string.Format(@"select d.id as 消费排名,m.username as 会员, m.mobile as 电话, d.contype as 总消费类型, 
+d.conamount as 消费金额, d.integralchange as 积分变更, d.contime as 消费日期 from consumptiondetail as d, members as m where d.mid=m.id and mid='{0}' order by contime desc;", mid);
             DataTable detial = new DataTable();
 
             #region
@@ -276,7 +296,7 @@ conamount as 消费金额, integralchange as 积分变更, contime as 消费日�
             {
                 return affectCount;
             }
-            
+
             return affectCount;
         }
 
@@ -285,7 +305,7 @@ conamount as 消费金额, integralchange as 积分变更, contime as 消费日�
             int affectCount = 0;
             if (!String.IsNullOrEmpty(mid))
             {
-                string sqlInsertCustomer = string.Format("update consumptionsummary set mid={0},contimes={1},totalconamount={2},totalintegral={3} where mid='{0}'", mid, conTimes, conTotalAmount, conIntegral);
+                string sqlInsertCustomer = string.Format("update consumptionsummary set contimes={1},totalconamount={2},totalintegral={3} where mid='{0}'", mid, conTimes, conTotalAmount, conIntegral);
                 affectCount = ExecuteNonQuery(sqlInsertCustomer);
             }
             else
@@ -331,7 +351,7 @@ values({0},'{1}',{2},{3},now())", mid, conType, conAmount, conIntegral);
             string sqlQueryIntegrel = "select * from consumptiondetail where mobile='" + mobile + "'";
             DataTable dtIntegrel = new DataTable();
             dtIntegrel = Postgres.ExecuteSQL(sqlQueryIntegrel);
-            
+
             conTimes = dtIntegrel.Rows.Count;
             if (conTimes == 0)
             {
@@ -356,7 +376,7 @@ values({0},'{1}',{2},{3},now())", mid, conType, conAmount, conIntegral);
                 //更新Customer表
                 Postgres.UpdateConSummary(mobile, conTimes, conAmount2, conIntegrel2);
             }
-            
+
         }
 
         /// <summary>
@@ -368,7 +388,7 @@ values({0},'{1}',{2},{3},now())", mid, conType, conAmount, conIntegral);
         public static int InsertMember(string name, string mobile)
         {
             int affectRow = 0;
-            string sqlInsertMemb = string.Format("Insert into Members(username,mobile) values('{0}','{1}')",name,mobile);
+            string sqlInsertMemb = string.Format("Insert into Members(username,mobile) values('{0}','{1}')", name, mobile);
             affectRow = ExecuteNonQuery(sqlInsertMemb);
             return affectRow;
         }
@@ -384,6 +404,48 @@ values({0},'{1}',{2},{3},now())", mid, conType, conAmount, conIntegral);
             DataTable detial = new DataTable();
             detial = ExecuteSQL(sqlGetTop10Cus);
             return detial;
+        }
+
+        /// <summary>
+        /// 根据用户名，修改电话号码
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="newMobile"></param>
+        /// <returns></returns>
+        public static int UpdateMembersMobile(string name, string oldMobile, string newMobile)
+        {
+            int affectCount = 0;
+            string sqlUpdate = string.Format("update members set mobile='{0}' where username='{1}' and mobile='{2}'", newMobile, name, oldMobile);
+            affectCount = Postgres.ExecuteNonQuery(sqlUpdate);
+            return affectCount;
+        }
+
+
+        /// <summary>
+        /// 删除消费summary信息
+        /// </summary>
+        /// <param name="mid"></param>
+        /// <returns></returns>
+        public static int DeleteConSummaryByMid(string mid)
+        {
+            int a = 0;
+            string sqlD = string.Format("delete from consumptionsummary where mid='{0}'",mid);
+            a = ExecuteNonQuery(sqlD);
+            return a;
+        }
+
+
+        /// <summary>
+        /// 删除消费detail信息
+        /// </summary>
+        /// <param name="mid"></param>
+        /// <returns></returns>
+        public static int DeleteConDetailByMid(string mid)
+        {
+            int a = 0;
+            string sqlD = string.Format("delete from consumptiondetail where mid='{0}'", mid);
+            a = ExecuteNonQuery(sqlD);
+            return a;
         }
 
         #endregion

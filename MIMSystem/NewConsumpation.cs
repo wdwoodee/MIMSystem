@@ -115,8 +115,8 @@ namespace MIMSystem
             int conTimes = 0;
             if (custmoer.Rows.Count == 0)
             {
-                #region old code
                 //为0，则表示新客户
+                #region old code
                 //conTimes = 1;
                 ////更新Customer表
                 //Postgres.InsertCustomer(mobile, conTimes, conAmount, conIntegrelChange);
@@ -130,7 +130,10 @@ namespace MIMSystem
             else
             {
                 //不为0，则表示不是新客户
+
+                //获取客户id
                 string id = custmoer.Rows[0]["id"].ToString();
+                //获取客户name
                 string name = custmoer.Rows[0]["username"].ToString();
 
                 //更新consumpationdetail表
@@ -156,11 +159,12 @@ namespace MIMSystem
 
                 DataTable dt = Postgres.ExecuteSQL(sqlSelectSummary);
 
-                if (dt.Rows.Count > 0)
+                if (Convert.ToInt32( dt.Rows[0]["count"]) != 0)
                 {
                     //如果不是第一次插入，则更新
                     Postgres.UpdateConSummary(id, conTimes, conAmount2, conIntegrel2);
                 }
+                else
                 {
                     //否则，插入
                     Postgres.InsertConSummary(id, conTimes, conAmount2, conIntegrel2);

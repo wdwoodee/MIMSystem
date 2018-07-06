@@ -43,10 +43,10 @@
             this.dataGridViewDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDetail.ContextMenuStrip = this.contextMenuStripDetail;
             this.dataGridViewDetail.GridColor = System.Drawing.SystemColors.Control;
-            this.dataGridViewDetail.Location = new System.Drawing.Point(57, 26);
+            this.dataGridViewDetail.Location = new System.Drawing.Point(43, 27);
             this.dataGridViewDetail.Name = "dataGridViewDetail";
             this.dataGridViewDetail.RowTemplate.Height = 23;
-            this.dataGridViewDetail.Size = new System.Drawing.Size(586, 382);
+            this.dataGridViewDetail.Size = new System.Drawing.Size(714, 414);
             this.dataGridViewDetail.TabIndex = 0;
             this.dataGridViewDetail.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewDetail_CellMouseUp);
             // 
@@ -68,7 +68,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(711, 440);
+            this.ClientSize = new System.Drawing.Size(800, 472);
             this.Controls.Add(this.dataGridViewDetail);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ConsumpationDetail";

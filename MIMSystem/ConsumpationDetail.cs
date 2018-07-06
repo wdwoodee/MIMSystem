@@ -17,19 +17,18 @@ namespace MIMSystem
         {
             InitializeComponent();
 
-            // 设定包括Header和所有单元格的列宽自动调整
-            dataGridViewDetail.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            // 设定包括Header和所有单元格的行高自动调整
-            dataGridViewDetail.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            //dataGridView2.Rows[0].ContextMenuStrip = this.contextMenuStrip1; 
-
-            //选中一行数据
-            dataGridViewDetail.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
             //显示所查询数据
             //dataGridViewDetail.DataSource = Postgres.GetConDetail(Form1.mobileForDetailQuery);
             reloadData(Form1.mobileForDetailQuery);
 
+            // 设定包括Header和所有单元格的列宽自动调整
+            dataGridViewDetail.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            // 设定包括Header和所有单元格的行高自动调整
+            dataGridViewDetail.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            this.dataGridViewDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            //选中一行数据
+            dataGridViewDetail.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             
         }
 
@@ -59,19 +58,19 @@ namespace MIMSystem
         private void 删除此次消费记录ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int id = 0;
-            DialogResult dr = MessageBox.Show("确认删除那客户记录吗？", "提示", MessageBoxButtons.OKCancel);
+            DialogResult dr = MessageBox.Show("确认删除此次客户消费记录吗？", "提示", MessageBoxButtons.OKCancel);
             if (dr == DialogResult.OK)
             {
                 int a = dataGridViewDetail.CurrentRow.Index;
                 id = Convert.ToInt32(dataGridViewDetail.Rows[a].Cells[0].Value);
-                string moible = dataGridViewDetail.Rows[a].Cells[1].Value.ToString();
+                string moible = dataGridViewDetail.Rows[a].Cells[2].Value.ToString();
 
-                string sqldelete = "delete from integral where id='" + id + "'";
+                string sqldelete = "delete from consumptiondetail where id='" + id + "'";
 
                 Postgres.ExecuteNonQuery(sqldelete);
-                Postgres.RecalculateCustomer(moible);
+                Postgres.RecalculateCustomer(Form1.mid);
                 //dataGridViewDetail.DataSource = Postgres.GetConDetail(moible);
-                reloadData(moible);
+                reloadData(Form1.mid);
             }
         }
         public void reloadData(string mid)
@@ -87,6 +86,7 @@ namespace MIMSystem
         //    form1.reLoadFrom();
         //}
 
+       //出发closing事件时，reload data。
         private void ConsumpationDetail_FormClosing(object sender, FormClosingEventArgs e)
         {
             Form1 form1;

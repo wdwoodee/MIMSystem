@@ -46,6 +46,7 @@ namespace MIMSystem
             if (Convert.ToInt32(dtMembs.Rows[0]["count"]) > 0)
             {
                 MessageBox.Show("该会员的电话在系统中已经存在！");
+                return;
             }
             else
             {

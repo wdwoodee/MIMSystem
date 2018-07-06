@@ -42,6 +42,7 @@
             this.添加会员ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改电话号码ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.消费ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.查找会员ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -49,7 +50,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(353, 28);
+            this.btnSearch.Location = new System.Drawing.Point(427, 28);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(50, 23);
             this.btnSearch.TabIndex = 0;
@@ -59,7 +60,7 @@
             // 
             // txtBoxSearch
             // 
-            this.txtBoxSearch.Location = new System.Drawing.Point(423, 28);
+            this.txtBoxSearch.Location = new System.Drawing.Point(502, 28);
             this.txtBoxSearch.Name = "txtBoxSearch";
             this.txtBoxSearch.Size = new System.Drawing.Size(121, 21);
             this.txtBoxSearch.TabIndex = 2;
@@ -82,7 +83,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView2.GridColor = System.Drawing.SystemColors.Control;
-            this.dataGridView2.Location = new System.Drawing.Point(27, 82);
+            this.dataGridView2.Location = new System.Drawing.Point(38, 79);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -94,7 +95,7 @@
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(540, 301);
+            this.dataGridView2.Size = new System.Drawing.Size(585, 326);
             this.dataGridView2.TabIndex = 4;
             this.dataGridView2.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseUp);
             // 
@@ -127,7 +128,7 @@
             this.消费ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(600, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(668, 25);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -135,7 +136,8 @@
             // 
             this.客户ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.添加会员ToolStripMenuItem,
-            this.修改电话号码ToolStripMenuItem1});
+            this.修改电话号码ToolStripMenuItem1,
+            this.查找会员ToolStripMenuItem});
             this.客户ToolStripMenuItem.Name = "客户ToolStripMenuItem";
             this.客户ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.客户ToolStripMenuItem.Text = "客户";
@@ -161,13 +163,20 @@
             this.消费ToolStripMenuItem.Text = "消费";
             this.消费ToolStripMenuItem.Click += new System.EventHandler(this.消费ToolStripMenuItem_Click);
             // 
+            // 查找会员ToolStripMenuItem
+            // 
+            this.查找会员ToolStripMenuItem.Name = "查找会员ToolStripMenuItem";
+            this.查找会员ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.查找会员ToolStripMenuItem.Text = "查找会员";
+            this.查找会员ToolStripMenuItem.Click += new System.EventHandler(this.查找会员ToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(600, 434);
+            this.ClientSize = new System.Drawing.Size(668, 439);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.txtBoxSearch);
@@ -199,6 +208,7 @@
         private System.Windows.Forms.ToolStripMenuItem 添加会员ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 消费ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 修改电话号码ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 查找会员ToolStripMenuItem;
         
     }
 }

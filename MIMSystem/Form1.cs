@@ -18,6 +18,7 @@ namespace MIMSystem
     {
         //public static string connectionString = ConfigurationManager.ConnectionStrings["connectString"].ConnectionString;
         public static string mobileForDetailQuery = string.Empty;
+        public static string mid = string.Empty;
         public Form1()
         {
             InitializeComponent();
@@ -41,6 +42,8 @@ namespace MIMSystem
             // 设定包括Header和所有单元格的行高自动调整
             dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             //dataGridView2.Rows[0].ContextMenuStrip = this.contextMenuStrip1; 
+
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 
             dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
@@ -116,19 +119,21 @@ namespace MIMSystem
 
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string mobile;
+            string mid;
             DialogResult dr = MessageBox.Show("确认删除此客户吗？", "提示", MessageBoxButtons.OKCancel);
             if (dr == DialogResult.OK)
             {
                 int a = dataGridView2.CurrentRow.Index;
-                mobile = dataGridView2.Rows[a].Cells[1].Value.ToString();
-                if (mobile != null && mobile.Length > 0)
-                {
-                    //删除customer表记录
-                    string sqlDeleteCustomer = "delete from customer where mobile='" + mobile + "'";
 
-                    //删除积分表记录
-                    string sqlDeleteIntegral = "delete from integral where mobile='" + mobile + "'";
+                //获取mid
+                mid = dataGridView2.Rows[a].Cells[0].Value.ToString();
+                if (mid != null && mid.Length > 0)
+                {
+                    //删除consumptionsummary表记录
+                    string sqlDeleteCustomer = "delete from consumptionsummary where mid='" + mid + "'";
+
+                    //删除consumptiondetail记录
+                    string sqlDeleteIntegral = "delete from consumptiondetail where mid='" + mid + "'";
                     Postgres.ExecuteNonQuery(sqlDeleteCustomer);
                     Postgres.ExecuteNonQuery(sqlDeleteIntegral);
                     reLoadDataForm1();
@@ -140,7 +145,9 @@ namespace MIMSystem
         private void 消费详情ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int a = dataGridView2.CurrentRow.Index;
+            //获取mid
             mobileForDetailQuery = dataGridView2.Rows[a].Cells[0].Value.ToString();
+            mid = mobileForDetailQuery;
             if (mobileForDetailQuery != null && mobileForDetailQuery.Length > 0)
             {
                 //fuForm中打开ziForm时需要设置所有者，就是ziForm的所有者是fuForm
@@ -194,7 +201,16 @@ namespace MIMSystem
 
         private void 修改电话号码ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            Form modifyMobile = new ModifyMobile();
+            modifyMobile.Owner = this;
+            modifyMobile.ShowDialog();
+        }
 
+        private void 查找会员ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form searchM = new SearchMembers();
+            searchM.Owner = this;
+            searchM.ShowDialog();
         }
     }
 }
