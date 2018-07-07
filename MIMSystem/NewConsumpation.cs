@@ -59,8 +59,8 @@ namespace MIMSystem
         {
             #region get txt value
 
-            string conType = cmbBoxConType.Text;
-            string mobile = txtBoxMobile.Text;
+            string conType = cmbBoxConType.Text.Trim();
+            string mobile = txtBoxMobile.Text.Trim();
             if (mobile == null || mobile.Count() != 11)
             {
                 MessageBox.Show("请输入正确11位手机号码！");
@@ -77,7 +77,7 @@ namespace MIMSystem
             {
                 try
                 {
-                    conAmount = Convert.ToInt32(txtBoxConAmount.Text);
+                    conAmount = Convert.ToInt32(txtBoxConAmount.Text.Trim());
                 }
                 catch
                 {
@@ -90,7 +90,7 @@ namespace MIMSystem
             //int conDecreaseInte = 0;
 
             //获取新增积分
-            if (txtBoxIntegral.Text == null)
+            if (txtBoxIntegral.Text.Trim() == null)
             {
                 MessageBox.Show("请输入积分，例如：100或者-100");
                 return;
@@ -99,7 +99,7 @@ namespace MIMSystem
             {
                 try
                 {
-                    conIntegrelChange = Convert.ToInt32(txtBoxIntegral.Text);
+                    conIntegrelChange = Convert.ToInt32(txtBoxIntegral.Text.Trim());
                 }
                 catch
                 {

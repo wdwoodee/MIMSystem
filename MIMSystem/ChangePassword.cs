@@ -21,10 +21,10 @@ namespace MIMSystem
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            string user = txtBoxUsername.Text;
-            string oldPwd = txtBoxPassword.Text;
-            string newPwd = txtBoxNewPwd.Text;
-            string newPwd2 = txtBoxNewPwd2.Text;
+            string user = txtBoxUsername.Text.Trim();
+            string oldPwd = txtBoxPassword.Text.Trim();
+            string newPwd = txtBoxNewPwd.Text.Trim();
+            string newPwd2 = txtBoxNewPwd2.Text.Trim();
 
             string sqlSelectUser = "select username,password from users where username='" + user + "'";
             string sqlUpdateUser = "update users set password='" + newPwd + "'" + "where username='" + user + "'";

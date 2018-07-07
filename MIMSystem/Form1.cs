@@ -98,7 +98,7 @@ namespace MIMSystem
 
             #region 根据mobile信息查询Summary
 
-            string sqlSearch = txtBoxSearch.Text.ToString();
+            string sqlSearch = txtBoxSearch.Text.ToString().Trim();
             if (string.IsNullOrEmpty(sqlSearch))
             {
                 MessageBox.Show("请输入会员名或者电话！");

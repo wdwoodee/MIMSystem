@@ -21,8 +21,8 @@ namespace MIMSystem
         private void btnOk_Click(object sender, EventArgs e)
         {
             #region get name and mobile
-            string name = txtBoxName.Text;
-            string mobile = txtBoxMobile.Text;
+            string name = txtBoxName.Text.Trim();
+            string mobile = txtBoxMobile.Text.Trim();
             if (string.IsNullOrEmpty(name))
             {
                 MessageBox.Show("请输入会员名，会员名不能为空！");

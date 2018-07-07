@@ -22,10 +22,10 @@ namespace MIMSystem
         {
             #region get txt
 
-            string name = txtBoxUser.Text;
-            string oldMobile = txtBoxMobile.Text;
-            string newMobile = txtBoxNewMobile.Text;
-            string newMobileAgain = txtBoxNewMobileA.Text;
+            string name = txtBoxUser.Text.Trim();
+            string oldMobile = txtBoxMobile.Text.Trim();
+            string newMobile = txtBoxNewMobile.Text.Trim();
+            string newMobileAgain = txtBoxNewMobileA.Text.Trim();
 
             #endregion
 

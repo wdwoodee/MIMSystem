@@ -39,14 +39,14 @@ namespace MIMSystem
         {
             DataTable a = new DataTable();
 
-            string sql = "select * from members";
+            string sql = "select id as 会员排名, username as 会员, mobile as 电话号码 from members";
             a = Postgres.ExecuteSQL(sql);
             return a;
         }
 
         private void btnSearchMem_Click(object sender, EventArgs e)
         {
-            string m = textBox1.Text;
+            string m = textBox1.Text.Trim();
             if (string.IsNullOrEmpty(m))
             {
                 MessageBox.Show("请输入会员名或者电话！");

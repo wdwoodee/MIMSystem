@@ -20,8 +20,8 @@ namespace MIMSystem
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = txtUsername.Text;
-            string password = txtPassword.Text;
+            string username = txtUsername.Text.Trim();
+            string password = txtPassword.Text.Trim();
             string sqlUsers = "select count(*) from users where username='" + username + "'" + "and " + "password='" + password + "'";
             int count = 0;
             count = Postgres.ExecuteScaler(sqlUsers);
