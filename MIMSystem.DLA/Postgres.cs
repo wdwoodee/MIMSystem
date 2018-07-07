@@ -201,7 +201,7 @@ s.totalintegral as 总积分 from consumptionsummary as s,members as m where s.m
         public static DataTable GetSummaryBySearchText(string searchText)
         {
             string sqlGetTop10Cus = string.Format(@"select s.mid as 会员排名, m.username as 会员, m.mobile as 电话, s.contimes as 总消费次数, s.totalconamount as 总消费金额,
-s.totalintegral as 总积分 from consumptionsummary as s,members as m where s.mid=m.id and m.username='{0}' or m.mobile='{0}';", searchText);
+s.totalintegral as 总积分 from consumptionsummary as s,members as m where s.mid=m.id and (m.username='{0}' or m.mobile='{0}');", searchText);
             DataTable top10Cus = new DataTable();
             top10Cus = ExecuteSQL(sqlGetTop10Cus);
             return top10Cus;
@@ -344,11 +344,11 @@ values({0},'{1}',{2},{3},now())", mid, conType, conAmount, conIntegral);
         }
 
 
-        public static void RecalculateCustomer(string mobile)
+        public static void RecalculateCustomer(string mid)
         {
             int conTimes = 0;
             //查询integrel表中消费的次数
-            string sqlQueryIntegrel = "select * from consumptiondetail where mobile='" + mobile + "'";
+            string sqlQueryIntegrel = "select * from consumptiondetail where mid='" + mid + "'";
             DataTable dtIntegrel = new DataTable();
             dtIntegrel = Postgres.ExecuteSQL(sqlQueryIntegrel);
 
@@ -356,7 +356,7 @@ values({0},'{1}',{2},{3},now())", mid, conType, conAmount, conIntegral);
             if (conTimes == 0)
             {
                 //已经全部删除消费记录，需要删除customer记录
-                string slqDeleteCustomer = "delete from consumptionsummary where mobile='" + mobile + "'";
+                string slqDeleteCustomer = "delete from consumptionsummary where mid='" + mid + "'";
                 ExecuteNonQuery(slqDeleteCustomer);
             }
             else
@@ -374,7 +374,7 @@ values({0},'{1}',{2},{3},now())", mid, conType, conAmount, conIntegral);
                 }
 
                 //更新Customer表
-                Postgres.UpdateConSummary(mobile, conTimes, conAmount2, conIntegrel2);
+                Postgres.UpdateConSummary(mid, conTimes, conAmount2, conIntegrel2);
             }
 
         }
@@ -400,7 +400,7 @@ values({0},'{1}',{2},{3},now())", mid, conType, conAmount, conIntegral);
         /// <returns></returns>
         public static DataTable GetConDetailsByMid(string mid)
         {
-            string sqlGetTop10Cus = string.Format(@"select * from consumptiondetail,members where mid='{0}';", mid);
+            string sqlGetTop10Cus = string.Format(@"select * from consumptiondetail where mid='{0}';", mid);
             DataTable detial = new DataTable();
             detial = ExecuteSQL(sqlGetTop10Cus);
             return detial;

@@ -44,7 +44,7 @@
             this.btnSearchMem.Name = "btnSearchMem";
             this.btnSearchMem.Size = new System.Drawing.Size(75, 23);
             this.btnSearchMem.TabIndex = 0;
-            this.btnSearchMem.Text = "查询会员";
+            this.btnSearchMem.Text = "查找会员";
             this.btnSearchMem.UseVisualStyleBackColor = true;
             this.btnSearchMem.Click += new System.EventHandler(this.btnSearchMem_Click);
             // 
@@ -52,7 +52,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(146, 39);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.Size = new System.Drawing.Size(118, 21);
             this.textBox1.TabIndex = 1;
             // 
             // dataGridViewMember
@@ -76,7 +76,7 @@
             // 删除会员ToolStripMenuItem
             // 
             this.删除会员ToolStripMenuItem.Name = "删除会员ToolStripMenuItem";
-            this.删除会员ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.删除会员ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.删除会员ToolStripMenuItem.Text = "删除会员";
             this.删除会员ToolStripMenuItem.Click += new System.EventHandler(this.删除会员ToolStripMenuItem_Click);
             // 

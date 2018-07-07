@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtBoxSearch = new System.Windows.Forms.TextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
@@ -41,8 +41,8 @@
             this.客户ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.添加会员ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改电话号码ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.消费ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查找会员ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.消费ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -74,26 +74,26 @@
             this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.ContextMenuStrip = this.contextMenuStrip1;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView2.GridColor = System.Drawing.SystemColors.Control;
             this.dataGridView2.Location = new System.Drawing.Point(38, 79);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.Size = new System.Drawing.Size(585, 326);
             this.dataGridView2.TabIndex = 4;
@@ -136,8 +136,8 @@
             // 
             this.客户ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.添加会员ToolStripMenuItem,
-            this.修改电话号码ToolStripMenuItem1,
-            this.查找会员ToolStripMenuItem});
+            this.查找会员ToolStripMenuItem,
+            this.修改电话号码ToolStripMenuItem1});
             this.客户ToolStripMenuItem.Name = "客户ToolStripMenuItem";
             this.客户ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.客户ToolStripMenuItem.Text = "客户";
@@ -156,19 +156,19 @@
             this.修改电话号码ToolStripMenuItem1.Text = "修改会员电话号码";
             this.修改电话号码ToolStripMenuItem1.Click += new System.EventHandler(this.修改电话号码ToolStripMenuItem1_Click);
             // 
-            // 消费ToolStripMenuItem
-            // 
-            this.消费ToolStripMenuItem.Name = "消费ToolStripMenuItem";
-            this.消费ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.消费ToolStripMenuItem.Text = "消费";
-            this.消费ToolStripMenuItem.Click += new System.EventHandler(this.消费ToolStripMenuItem_Click);
-            // 
             // 查找会员ToolStripMenuItem
             // 
             this.查找会员ToolStripMenuItem.Name = "查找会员ToolStripMenuItem";
             this.查找会员ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.查找会员ToolStripMenuItem.Text = "查找会员";
             this.查找会员ToolStripMenuItem.Click += new System.EventHandler(this.查找会员ToolStripMenuItem_Click);
+            // 
+            // 消费ToolStripMenuItem
+            // 
+            this.消费ToolStripMenuItem.Name = "消费ToolStripMenuItem";
+            this.消费ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.消费ToolStripMenuItem.Text = "消费";
+            this.消费ToolStripMenuItem.Click += new System.EventHandler(this.消费ToolStripMenuItem_Click);
             // 
             // Form1
             // 

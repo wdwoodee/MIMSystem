@@ -144,6 +144,7 @@ namespace MIMSystem
                 dtIntegrel = Postgres.GetConDetailsByMid(id);
 
                 conTimes = dtIntegrel.Rows.Count;
+
                 int conAmount2 = 0;
                 foreach (DataRow row in dtIntegrel.Rows)
                 {
